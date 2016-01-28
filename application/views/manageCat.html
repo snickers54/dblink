@@ -1,0 +1,22 @@
+vous etes ici : <a href="/adminForum/"> Administration </a> > <a href="/adminForum/manageCat"> gerer les categories</a><br><br>
+
+<form action="/adminForum/manageCat" method="POST">
+<table>
+	<tr>
+		<th>nom</th>
+		<th>Ordre</th>
+		<th> # </th>
+	</tr>
+	{% set i = 0 %}
+	{% for value in cat %}
+	<tr>
+		<td><input type="text" value="{{value['name']}}" name="value[{{i}}][name]"></td>
+		<td><input type="number" value="{{value['order']}}" name="value[{{i}}][order]"></td>
+		<td><a href="/adminForum/deleteCat?id={{value['id']}}"> supprimer</a></td>
+		<td><input type="hidden" value="{{value['id']}}" name="value[{{i}}][id]"></td>
+		{% set i = i+1 %}
+	</tr>
+	{% endfor %}
+</table>
+<input type="submit" value="modifier" name="modifier">
+</form>

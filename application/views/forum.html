@@ -1,0 +1,85 @@
+<br/>
+<h2 style="text-align: center; margin-top: 30px; margin-bottom: -20px; text-transform: uppercase;">Forum</h2><br/>
+<hr class="soften">
+
+{% set cat = 0 %}
+
+
+
+	{% for data in ret.rows %}
+		{%  if data.name_forum is not empty %}
+	
+{% if cat != data.id_categorie %}
+   </table>
+    </dd>
+</dl>
+   <dl class="mail news">
+   <dt class="cursor"> <span class="label">{{ data.name_cat }}</span></dt>
+   <dd class="well">
+
+    <table class="table">
+	<tr>
+        <td> <strong> Nouveau Messages </strong></td>
+    	<td>
+    		<strong>Forums</strong>
+    	</td>             
+        <td style="text-align: center;">
+        	<strong>Sujets</strong>
+        </td>
+        <td style="text-align: center;">
+        	<strong>Messages</strong>
+        </td>
+        <td style="text-align: center;">
+        	<strong>Dernier message</strong>
+        </td>
+    </tr>
+
+    {% set cat = data.id_categorie %}
+	
+{% endif %}
+{% if data.view == true %}
+	<tr>
+        <td></td>
+		<td class="titre">
+			<strong>
+                
+				<a href='/forum/voirForum?id={{data.id_forum1}}'>{% filter upper %}{{ data.name_forum|raw }}{% endfilter %}</a>
+                
+			</strong>
+			<br/>
+			{{ data.desc|raw }}  
+      	{% if data.moderators is not empty %}
+        	<br/>
+        	<i>
+        		Moderateurs : {{data['moderators']}}
+        		
+        	</i>
+        {% endif %}
+    	</td>
+
+    	<td style="text-align: center;">
+    		{{ data.nb_topics }}
+    	</td>
+
+    	<td style="text-align: center;">
+    		{{ data.nb_reponses }}
+    	</td>
+
+    	<td style="text-align: center;">
+    		<a href="/forum/viewTopic?id={{ data.id_topic1 }}&amp;post={{ data.last_post}}">Dernier message</a>
+    	</td>
+    </tr>
+        {% endif %}
+
+      {% endif %}
+   
+
+    {% endfor %}
+
+</table>
+   </dd>
+</dl>
+<div class="span12">
+<!--powered by TaiTaiBB -->
+<a href="/adminForum/" class="btn_get" style="float: right;"><i class="icon-cog"></i> Administration</a>
+</div>

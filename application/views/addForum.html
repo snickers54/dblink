@@ -1,0 +1,28 @@
+<br/>
+<hr class="soften">
+<form action="/adminForum/addForum" method="POST">
+	<table>
+		<tr>
+			<td>
+categorie : </td><td><select name="cat_id">
+			{% for value in cat %}
+				<option change="forum:getForums" id="{{value['id']}}" value="{{value['id']}}">{{value['name']}}</option>
+			{% endfor %}
+		</select></td>
+	</tr>
+<tr><td>nom : </td><td><input type="text" name="nom"></td></tr>
+<tr><td>description (l'utilisation du html est possible): </td><td><textarea name="desc">
+</textarea></td></tr>
+<tr><td>Visibilite :</td><td><input type="radio" value = "1" name="right_view" checked> Tout le monde  <input type="radio" name="right_view" value="2"> staff <input type="radio" value="3" name="right_view"> Admins</td></tr>
+<tr><td>Peut poster:</td><td><input type="radio" value = "1" name="right_post" checked> Tout le monde  <input type="radio" name="right_post" value="2"> staff <input type="radio" value="3" name="right_post"> Admins</td></tr>
+<tr><td>Peut Annoncer:</td><td><input type="radio" value = "1" name="right_annonce"> Tout le monde  <input type="radio" name="right_annonce" value="2" checked > staff <input type="radio" value="3" name="right_annonce"> Admins</td></tr>
+<tr><td>Peut Creer un sujet:</td><td><input type="radio" value = "1" name="right_create" checked> Tout le monde  <input type="radio" name="right_create" value="2"> staff <input type="radio" value="3" name="right_create"> Admins</td></tr>
+<tr><td>moderateurs: </td><td>
+	{% if modo != false %}
+	{% for m in modo %}
+		<input type="checkbox" name="moderateur[]" value="{{m['login']}}">{{m['login']}}<br>
+		{% endfor %}
+		{% endif %}</td></tr>
+</table> <br>
+<input type="submit" value="envoyer">
+</form>

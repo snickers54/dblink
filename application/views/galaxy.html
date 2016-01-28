@@ -1,0 +1,45 @@
+<div class="row-fluid">
+	<div id="protovis" class="well span8">
+	</div> 
+	<div class="span4">
+		<div class="well">
+			<select class="span12" name="galaxie" change="board:changeGalaxie">
+				{% for g in list_galaxie %}
+					<option value="{{g.galaxie}}" {% if g.galaxie == current_galaxie %}selected="selected"{%endif%}>G{{g.galaxie}}</option>
+				{% endfor %}
+			</select>
+			<p>
+				<label class="checkbox">
+					<input type="checkbox" name="orbites" change="board:changeGalaxie"/> <em>{{_lang.galaxy_orbites_help}}</em>
+			    </label>
+				<label class="checkbox">
+					<input type="checkbox" name="coords" change="board:changeGalaxie"/> <em>{{_lang.galaxy_coords_help}}</em>
+			    </label>
+			</p>
+			<p>
+				<label class="checkbox">
+					<input type="checkbox" name="planet_unhabited" change="board:changeGalaxie" checked="checked"/> <em>{{_lang.galaxy_unhabited_help}}</em>
+			    </label>
+				<label class="checkbox">
+					<input type="checkbox" name="planet_players" change="board:changeGalaxie" checked="checked"/> <em>{{_lang.galaxy_players_help}}</em>
+			    </label>
+			</p>
+			<p>
+				<span class="badge" style="background-color:#167528;">{{_lang.status_me}}</span>
+				<span class="badge" style="background-color:#5B6F85;">{{_lang.status_friends}}</span>
+				<span class="badge" style="background-color:#194575;">{{_lang.status_ally}}</span>
+				<span class="badge" style="background-color:#B30C0C;">{{_lang.status_hostile}}</span>
+			</p>
+		</div>
+		<div class="off" id="preview_planete">
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+	  width = $("#protovis").width(),
+	  height = width;
+	  visualize_galaxie({galaxie: $("select[name=galaxie]").val(), planet_unhabited: "yes", planet_players: "yes"});
+	  //visualize_univers();
+	});
+</script>

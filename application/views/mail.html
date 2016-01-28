@@ -1,0 +1,16 @@
+{% if mp is defined %}
+	{% include 'mail_button.html' %}
+	{% for mail in children %}
+		<div class="well">
+			<div class="row-fluid">
+				{% include 'mail_display.html' %}
+			</div>
+		</div>
+	{% endfor %}
+	<div class="well">
+		<div class="row-fluid">
+			{% set mail = mp %}
+			{% include 'mail_display.html'%}
+		</div>
+	</div>
+{% endif %}

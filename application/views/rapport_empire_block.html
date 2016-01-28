@@ -1,0 +1,25 @@
+<ul class="nav nav-list">
+	{% for d in b %}
+		<li>
+			<a href="#" class="label label-inverse pop" data-placement="right" data-content='
+			<div class="row-fluid">
+				<div class="span6">
+					<img src="/public/images/{{d.avatar}}" class="avatar_small img-polaroid"/></div><div class="span6">
+					<ul class="nav nav-list">
+						<li>
+							<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-attack-white.png" /> {{d.attaque}}</a>
+						</li>
+						<li>
+							<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-shield-white.png" /> {{d.vie}}</a>
+						</li>
+						<li>
+							<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-cargo-white.png" /> {{d.stockage_unite}}</a>
+						</li>
+					</ul>
+				</div>
+			</div>' data-original-title="{{d.nom}}">
+				{{d.number}} {{d.nom}}
+			</a>
+		</li>
+	{% endfor %}
+</ul>

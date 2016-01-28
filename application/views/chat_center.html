@@ -1,0 +1,71 @@
+	<div class="span4 off" id="wrapper_connected">
+		<img src="/public/images/closelabel.png" class="closelabel cursor" click="chat:toggleChat"/>
+		<div class="well">
+			<ul class="nav nav-list">
+				<li class="nav-header">{{_lang.friends_connected}}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="span8 offset4 off" id="wrapper_chat">
+		<img src="/public/images/closelabel.png" class="closelabel cursor" click="chat:toggleChat"/>
+		<div class="well">
+			<div class="input-append">
+				<input type="text" name="send" class="input-xxlarge" id="chat_send"/>
+				<a href="#" class='btn primary' click="chat:chatSend">{{_lang.send}}</a>
+			</div>
+            <img src='/public/images/chat/bold.png' class="cursor twipbelow" data-original-title="gras" onClick="insert_text('[b]', '[/b]', 'send');" />
+            <img src='/public/images/chat/italic.png' class="cursor twipbelow" data-original-title="italique" onClick="insert_text('[i]', '[/i]', 'send');" />
+            <img src='/public/images/chat/underline.png' class="cursor twipbelow" data-original-title="souligner" onClick="insert_text('[s]', '[/s]', 'send');" />
+            <img src='/public/images/chat/link.png' class="cursor twipbelow" data-original-title="lien" onClick="insert_link('send');" />
+            <img src='/public/images/chat/image.png' data-original-title="image" class="cursor twipbelow" onClick="insert_text('[img]', '[/img]', 'send');" />
+            <img src='/public/images/chat/sourire.png' class="cursor" onClick="insert_text(':)', '', 'send');" />
+            <img src='/public/images/chat/langue.png' class="cursor" onClick="insert_text(':P', '', 'send');" />
+            <img src='/public/images/chat/hihi.png' class="cursor" onClick="insert_text('^^', '', 'send');" />
+            <img src='/public/images/chat/heureux.png' class="cursor" onClick="insert_text(':D', '', 'send');" />
+            <img src='/public/images/chat/wink.png' class="cursor" onClick="insert_text(';)', '', 'send');" />
+            <img src='/public/images/chat/huh.png' class="cursor" onClick="insert_text(':o', '', 'send');" />
+            <img src='/public/images/chat/rire.gif' class="cursor" onClick="insert_text(':mdr:', '', 'send');" />
+            <img src='/public/images/chat/euh.gif' class="cursor" onClick="insert_text(':euh:', '', 'send');" />
+            <img src='/public/images/chat/triste.png' class="cursor" onClick="insert_text(':triste:', '', 'send');" />
+            <img src='/public/images/chat/colere.png' class="cursor" onClick="insert_text(':@', '', 'send');" />
+            <img src='/public/images/chat/hein.gif' class="cursor" onClick="insert_text(':hein:', '', 'send');" />
+            <img src='/public/images/chat/siffle.png' class="cursor" onClick="insert_text(':lala:', '', 'send');" />
+
+			{% for msg in msg_chats %}
+				<div class="chat_msg" id="message_{{msg.id}}">
+					<hr />
+					<div class="row-fluid">
+						{% if msg.user_id != 0 %}
+							<div class="span2">
+								<a class="chat_photolink" href="/user/index?user_id={{msg.user_id}}">
+									<img src="{{msg.avatar}}" class="avatar_medium img-polaroid chat_avatar"/>
+								</a>
+							</div>
+						{% endif %}
+						<div class="{% if msg.user_id != 0 %}span10{%else%}span12{%endif%}">
+							{% if _user.user_id == msg.user_id or _user.isModo or _user.isAdmin %}
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true" click="chat:del" msg_id="{{msg.id}}">×</button>
+							{% endif %}
+							{% if msg.user_id != 0 %}
+								<ul class="nav nav-pills">
+									<li><a class="label label-inverse chat_userlink" href="/user/index?user_id={{msg.user_id}}"><i class="icon-user icon-white"></i> <span class="chat_login">{{msg.login | capitalize}}</span></a></li>
+									<li><a data-placement="bottom" class="tip label label-inverse" data-original-title="{{_lang.grade}}" href="#"><i class="icon-chevron-up icon-white"></i> <span class="chat_grade">{{msg.grade}}</span></a></li>
+									{% if msg.ally_nom is defined and msg.ally_nom != null %}
+										<li><a data-placement="bottom" class="tip label label-inverse" data-original-title="{{_lang.ally}}" href="#"><i class="icon-flag icon-white"></i> <span class="chat_alliance">{{msg.ally_nom}}</span></a></li>
+									{% endif %}
+								</ul>
+								<span data-placement="bottom" data-original-title="quote" class="pull-right cursor tip" click="chat:quote"><i class="icon-comment icon-white"></i></span>
+							{% endif %}
+							<blockquote class="chat_content">
+								{{msg.msg | bbcode | raw | nl2br}}
+							</blockquote>
+							{% if msg.user_id != 0 %}
+								<i class="date" time="{{msg.timestamp}}"></i>
+								<div class="off chat_rawcontent">{{msg.msg_wbbcode}}</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>

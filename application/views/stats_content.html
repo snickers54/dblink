@@ -1,0 +1,41 @@
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>{{_lang.stats_login}}</th>
+			<th class="tip cursor" data-original-title="{{_lang.stats_batiments}}" data-placement="left">{{_lang.stats_batiments_abbr}}</th>
+			<th class="tip cursor" data-original-title="{{_lang.stats_technologies}}" data-placement="left">{{_lang.stats_technologies_abbr}}</th>
+			<th class="tip cursor" data-original-title="{{_lang.stats_vaisseaux}}" data-placement="left">{{_lang.stats_vaisseaux_abbr}}</th>
+			<th class="tip cursor" data-original-title="{{_lang.stats_defenses}}" data-placement="left">{{_lang.stats_defenses_abbr}}</th>
+			<th class="tip cursor" data-original-title="{{_lang.stats_civils}}" data-placement="left">{{_lang.stats_civils_abbr}}</th>
+			<th class="tip cursor" data-original-title="{{_lang.stats_total}}" data-placement="left">{{_lang.stats_total_abbr}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% if mystats is defined %}
+			<tr class="success">
+				<td class="label label-inverse">{{mystats.position}}</td>
+				<td><a href="/user/index?user_id={{mystats.user_id}}">{{mystats.login}}</a></td>
+				<td>{{mystats.batiments}}</td>
+				<td>{{mystats.technologies}}</td>
+				<td>{{mystats.vaisseaux}}</td>
+				<td>{{mystats.defenses}}</td>
+				<td>{{mystats.civils}}</td>
+				<td>{{mystats.total}}</td>
+			</tr>
+			<tr><td colspan="8"><hr /></td></tr>
+		{% endif %}
+		{% for s in stats %}
+			<tr {% if s.user_id == _user.user_id %}class="success"{%endif%}>
+				<td class="label label-inverse">{{s.position}}</td>
+				<td><a href="/user/index?user_id={{s.user_id}}">{{s.login}}</a></td>
+				<td>{{s.batiments}}</td>
+				<td>{{s.technologies}}</td>
+				<td>{{s.vaisseaux}}</td>
+				<td>{{s.defenses}}</td>
+				<td>{{s.civils}}</td>
+				<td>{{s.total}}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

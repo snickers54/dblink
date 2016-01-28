@@ -1,0 +1,93 @@
+<br/>
+<h2 style="text-align: center; margin-top: 30px; margin-bottom: -20px; text-transform: uppercase;">{{info['topic_name']|raw}} </h2><br/>
+
+<hr class="soften_wm">
+<div style="text-align:center;">
+  <a class="btn_get" href="/forum">Retour au forum</a>
+  <a class="btn_get" href="/forum/voirForum?id={{info['forum_id']}}">Retour {{info['forum_name']}}</a>
+</div>
+<hr class="soften_wm">
+{% set i = 1 %}
+{% for value in posts %}
+
+{% if value['id'] is not empty  %}
+<div name="{{value['id']}}" class="row"  mouseenter="forum:displayActions" mouseleave="forum:displayNoneActions">
+
+<ul class="actions span10 offset2">
+      {% if value['auteur'] == me or canModerate == true %}
+        <li style=""><a href = "/forum/editPost?id={{value['id']}}" title="Editer"><i class="icon-pencil"></i> Editez</a></li>
+        <li style="display: inline;"><a href = "/forum/deletePost?id={{value['id']}}&topic={{info['topic_id']}}" title="Supprimer"><i class="icon-trash"></i> Supprimer</a></li>
+      {% endif %}
+        <li style="display: inline;"><a href = "#answer" click="forum:quote" id="{{value['id']}}" author="{{value['auteur']}}" title="Citer"><i class="icon-share"></i> Citer</a></li>
+</ul>
+<dl class="mail news">
+   <dt class="cursor"> <span class="label label-info mp_welcome-step"> {{i}}</span>
+      <span class="label label-success pull-right">{{value['date']}}</span></dt>
+    <dd class="well" style="min-height: 80px;">
+     
+      <div class="span2">
+        <a href="/user/index?user_id={{value['user_id']}}">{{value['auteur']}}</a>
+      </div>
+      <div class="span10">
+        <div style="border-left:1px solid grey; min-height: 80px; padding-left: 5px;">
+          <div class="messagebox">{{value.message| nl2br | bbcode | raw}}</div>
+        </div>
+      </div>
+      <div style="clear:both;height: 0; overflow: hidden;"></div>
+    </dd>
+</dl>
+</div>
+{% set i = i + 1 %}
+{% endif %}
+{% endfor %}
+
+{{next|raw}}
+
+{% if canAnswer == true %}
+<div class="row">
+  <form action="/forum/postAnswer?id={{info['topic_id']}}" method="POST">
+     <dl class="mail news" style="min-height: 100px;">
+   <dt class="cursor"> <label for="answer"><span class="label label-info">Repondre:</h3></label></dt>
+      <dd class="well">
+    <div class="span2">
+      
+      <div style="padding: 20px;">
+      <img src="/public/images/chat/bold.png" click="forum:insert_text" op="[b]" close="[/b]"></i>
+      <i class="icon-share" click="forum:insert_text" op="[quote]" close="[/quote]"></i>
+      <img src="/public/images/chat/italic.png" click="forum:insert_text" op="[i]" close="[/i]"></i>
+      <img src="/public/images/chat/underline.png" click="forum:insert_text" op="[u]" close="[/u]"></i>
+      <i class="icon-picture" click="forum:insert_text" op="[img]" close="[/img]"></i>
+    </div></div>
+    <div class="span10">
+   
+
+      <div class="messagebox">
+        <textarea id="answer" name="answer" id="answer" rows="7" style="width: 920px; resize:vertical;" placeholder="Ecrire son message ..."></textarea>
+      </div>
+   
+      </div>
+    
+        <div style="text-align: center; width: 100%;" ><input type="submit" value="Envoyer le message" class="btn_get"></input></div>
+         </dd>
+    </dl>
+    </div>
+</form>
+</div>
+
+
+
+
+
+<!--<img src="/public/images/bold.gif" alt="gras" click="forum:insert_text('[b]', '[/b]')">
+<img src="/public/images/quote.gif" alt="citation" click="forum:insert_text('[quote]', '[/quote]')">
+<img src="/public/images/italic.gif" alt="italic" click="forum:insert_text('[i]', '[/i]')">
+<img src="/public/images/strike.gif" alt="barre" click="forum:insert_text('[s]', '[/s]')">
+<img src="/public/images/underline.gif" alt="souligner" click="forum:insert_text('[u]', '[/u]')">
+<img src="/public/images/image.gif" alt="image" click="forum:insert_text('[img]', '[/img]')">
+<img src="/public/images/code.gif" alt="image" click="forum:insert_text('[code=]', '[/code]')">-->
+<br/> <br />
+</div>
+{% endif %}
+<script>
+$('pre.code').highlight({source:1, zebra:1, indent:'space', list:'ol'});
+</script>

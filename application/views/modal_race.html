@@ -1,0 +1,24 @@
+{% if isLogged == true and _user.race|length == 0 %}
+    <div class="modal hide fade" id="modal_race">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>{{_lang.title_choose_race}}</h3>
+        </div>
+        <div class="modal-body">
+            <form method="POST" class="pull-left form-horizontal">
+                <select name="race" id="select_race">
+                    <option value="{{_lang.race_raideur}}">
+                        {{_lang.race_raideur | capitalize}}
+                    </option>
+                    <option value="{{_lang.race_mineur}}">
+                        {{_lang.race_mineur | capitalize}}
+                    </option>
+                    <option value="{{_lang.race_explorateur}}">
+                        {{_lang.race_explorateur | capitalize}}
+                    </option>
+                </select>
+                <a href="#" class="btn primary" click="home:changeRace">{{_lang.ok}}</a>
+            </form>
+        </div>
+    </div>
+{% endif %}

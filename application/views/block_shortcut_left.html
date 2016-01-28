@@ -1,0 +1,57 @@
+<div class="row-fluid">
+	<div class="span3">
+		<div class="well well-small">
+			<ul class="nav nav-list" id="shortcuts">
+				<li>
+					<a href="/board/rapports" id="notif_rapports" {% if _new_rapports > 0 %}class="mail-warn"{%endif%}>
+						<i class="icon-inbox icon-white"></i>
+						<i class="icon-inbox off"></i>
+						<sub nb="0">+{{_new_rapports}}</sub>
+					</a>
+				</li>
+				<li>
+					<a href="/move/index" id="notif_move" {% if _move is defined and _move|length > 0 %}class="mail-warn"{%endif%}>
+						<i class="icon-plane icon-white"></i>
+						<i class="icon-plane off"></i>
+						<sub nb="0">+{{_move|length}}</sub>
+					</a>
+				</li>
+				<li>
+					<a href="/user/mails" id="notif_mails" {% if _new_mails|length > 0 %}class="mail-warn"{%endif%}>
+						<i class="icon-envelope icon-white"></i>
+						<i class="icon-envelope off"></i>
+						<sub nb="0">+{{_new_mails|length}}</sub>
+					</a>
+				</li>
+				<li>
+					<a href="#" id="notif_chat" click="chat:toggleChat">
+						<i class="icon-comment icon-white"></i>
+						<i class="icon-comment off"></i>
+						<sub nb="0">+0</sub>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="span9 well well-small">
+		<ul class="nav nav-list">
+			{% for p in _list_planets %}
+				{% if _planet.id == p.id %}
+					<li class="active">
+						<a href="#">
+							<i class="icon-globe icon-white"></i> {{_planet.nom}}
+							<span class="pull-right">G{{_planet.galaxie}}</span>
+						</a>
+					</li>
+				{% else %}
+					<li>
+						<a href="#" planet_id="{{p.id}}" click="home:changePlanet">
+							<i class="icon-globe"></i> {{p.nom}}
+							<span class="pull-right">G{{p.galaxie}}</span>
+						</a>
+					</li>					
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,77 @@
+Vous etes ici : <a href="/forum/">Index</a> > <a href="/forum/voirForum?id={{infos['id']}}">{{infos['name']}}</a> > <strong> moderer le forum </strong>
+<br /><br />
+{{linkCreate|raw}}
+<form action = "/forum/moderate?id={{infos['id']}}" method = "POST" id="form">
+<table>
+<tr>
+<th> </th>
+<th class = "titre">Titre du topic</th>
+<th class = "nombremessages">createur</th>
+<th class = "nombremessages">nombre de reponses</th>
+<th class = "nombremessages">nombre de vues</th>
+<th class = "derniermessage">dernier message</th>
+<th> <input type="checkbox" name="selectAll" click="forum:checkboxAll"> </th>
+<th> <div class="btn-group">
+          <a class="btn btn-primary" href="#"><i class="icon-cog icon-white"></i> Action</a>
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <li> <input type="submit" value="lock" name="lock"> </li>
+	 	  <li> <input type="submit" value="unlock" name="unlock"> </li>
+	 	  <li> <input type="submit" value="move" name="move"> </li>
+	 	</ul>
+	 </div> </th>
+{% set i = 0 %}
+
+{% for value in topics.rows %}
+
+
+{% if value.id is not empty %}
+<tr>
+{% if (value.genre == "annonce") %}
+<td>
+	{% if (value['lock'] == 1) %}
+	locked 
+	{% endif %}
+</td>
+<td class = "annonce">Annonce : <a href="/forum/viewTopic?id={{value['id']}}"><strong>{{value['name']}}</a></strong></td>
+<td class = "nombremessagesAnnonce">{{value['creator']}} totot</td>
+<td class = "nombremessagesAnnonce">{{value['reponses']}}</td>
+<td class = "nombremessagesAnnonce">{{value['views']}}</td>
+<td class = "derniermessageAnnonce"><a href = "/forum/viewTopic?id={{value['id']}}&amp;post={{value['id_last_post']}}">last message</a><br />
+at {{value['date']}}</td>
+<td> <input type="checkbox" name="topic[{{value['id']}}]" class="check"></td>
+{% elseif (value['genre'] == "admin") %}
+<td>
+	{% if (value['lock'] == 1) %}
+	locked 
+	{% endif %}
+</td>
+<td class = "Admin">Admin : <a href="/forum/viewTopic?id={{value['id']}}"><strong>{{value['name']}}</a></strong></td>
+<td class = "nombremessagesAdmin">{{value['creator']}}</td>
+<td class = "nombremessagesAdmin">{{value['reponses']}}</td>
+<td class = "nombremessagesAdmin">{{value['views']}}</td>
+<td class = "derniermessageAdmin"><a href = "/forum/viewTopic?id={{value['id']}}&amp;post={{value['id_last_post']}}">last message</a><br />
+at {{value['date']}}</td>
+<td> <input type="checkbox" name="topic[{{value['id']}}]" class="check"></td>
+{% else %}
+<td>
+	{% if (value['lock'] == 1) %}
+	locked 
+	{% endif %}
+</td>
+<td class = "titre"><a href="/forum/viewTopic?id={{value['id']}}"><strong>{{value['name']}}</a></strong></td>
+
+<td class = "nombremessages">{{value['creator']}}</td>
+<td class = "nombremessages">{{value['reponses']}}</td>
+<td class = "nombremessages">{{value['views']}}</td>
+<td class = "derniermessage"><a href = "/forum/viewTopic?id={{value['id']}}&amp;post={{value['id_last_post']}}">last message</a><br />
+at {{value['date']}}</td>
+<td> <input type="checkbox" name="topic[{{value['id']}}]" class="check"></td>
+{% endif %}
+</tr>
+{% endif %}
+{% set i = i + 1 %}
+{% endfor %}
+</table>
+</form>
+

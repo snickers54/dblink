@@ -1,0 +1,41 @@
+<ul class="thumbnails">
+{% set i = 0 %}
+{% for defense in defenses %}
+	{% if defense.number > 0 %}
+		{% if i % 3 == 0 and i > 0 %}
+			</ul>
+			<ul class="thumbnails">
+		{% endif %}
+				  <li class="span4">
+				    	<div class="thumbnail">
+							<img src="/public/images/{{defense.avatar}}" class="avatar_large img-polaroid"/>
+							<h3>{{defense.nom}}</h3>
+							<hr />
+							<ul class="nav nav-pills">
+								{% if defense.attaque is defined %}
+								<li>
+									<a href="#" class="label label-inverse">
+										<img src="/public/images/icons/icon-attack-white.png" /> {{defense.attaque}}
+									</a>
+								</li>
+								{%endif%}
+								
+								<li>
+									<a href="#" class="label label-inverse">
+										<img src="/public/images/icons/icon-shield-white.png" /> {% if defense.vie is defined %}{{defense.vie}}{% else %}{{defense.defense_base}}{% endif %}
+									</a>
+								</li>
+								{% if defense.stockage_unite is defined %}
+								<li>
+									<a href="#" class="label label-inverse">
+										<img src="/public/images/icons/icon-cargo-white.png" /> {{defense.stockage_unite}}
+									</a>
+								</li>
+								{% endif %}
+							</ul>
+						</div>
+					</li>
+		{% set i = i + 1 %}
+	{% endif %}
+{% endfor %}
+</ul>

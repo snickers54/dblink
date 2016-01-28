@@ -1,0 +1,80 @@
+<div class="row-fluid">
+	<div class="span8">
+		<div class="tabbable">
+			<ul class="nav nav-tabs onglet_top affix">
+				<li id="vaisseaux_li" class="active">
+					<a href="#vaisseaux" click="board:setOnglet" data-toggle="tab">{{_lang.building_vaisseaux}}</a>
+				</li>
+				<li id="defenses_li">
+					<a href="#defenses" click="board:setOnglet" data-toggle="tab">{{_lang.building_defenses}}</a>
+				</li>
+				<li id="civils_li">
+					<a href="#civils" click="board:setOnglet" data-toggle="tab">{{_lang.building_civils}}</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active well" id="vaisseaux">
+					{% include 'flotte.html' %}
+				</div>
+				<div class="tab-pane well" id="defenses">
+					{% include 'defense.html' %}
+				</div>
+				<div class="tab-pane well" id="civils">
+					{% include 'civil.html' %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="span4">
+		<div class="well">
+		<ul class="nav nav-list list-right">
+			<li class="nav-header">{{_lang.create_report}}</li>
+			<li class="divider"></li>
+			<li>
+				<label class="checkbox">
+					<input type="checkbox" name="civils" checked="checked"/> {{_lang.building_civils}}
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" name="vaisseaux" checked="checked"/> {{_lang.building_vaisseaux}}
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" name="defenses" checked="checked" /> {{_lang.building_defenses}}
+				</label>
+				<p>
+					<a href="#" class="btn btn-danger" click="board:rapportEmpire">{{_lang.generate}}</a>
+				</p>
+				<p>
+					<input type="text" readonly style="cursor:text" id="generate_text" value="{{report}}" />
+				</p>
+			</li>
+		</ul>
+	</div>
+	<div class="well">
+		<ul class="nav nav-list list-right">
+			<li class="nav-header">{{_lang.building_vaisseaux}}</li>
+			<li class="divider"></li>
+			{% for vaisseau in vaisseaux %}
+				{% if vaisseau.number > 0 %}
+					<li>> {{vaisseau.number}} {{vaisseau.nom}}</li>
+				{% endif %}
+			{% endfor %}
+			<li class="nav-header">{{_lang.building_defenses}}</li>
+			<li class="divider"></li>
+			{% for defense in defenses %}
+				{% if defense.number > 0 %}
+					<li>> {{defense.number}} {{defense.nom}}</li>
+				{% endif %}
+			{% endfor %}
+
+			<li class="nav-header">{{_lang.building_civils}}</li>
+			<li class="divider"></li>
+			{% for civil in civils %}
+				{% if civil.number > 0 %}
+					<li>> {{civil.number}} {{civil.nom}}</li>
+				{% endif %}
+			{% endfor %}
+
+		</ul>
+	</div>
+	</div>
+</div>

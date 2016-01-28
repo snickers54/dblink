@@ -1,0 +1,48 @@
+<form {% if s is defined %}id="terrains_form_{{s.id}}"{%else%} id="terrains_new"{%endif%} method="POST" action="#" class="form-horizontal {% if s is not defined %}off{%endif%}">
+	{% if s is defined %}
+		<input type="hidden" name="id" value="{{s.id}}" />
+	{% endif %}
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_name}}</label>
+		<div class="controls">
+			<input type="text" name="nom" value="{{s.nom}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_description}}</label>
+		<div class="controls">
+			<textarea name="texte">{{s.texte|nl2br}}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.text_metal}}</label>
+		<div class="controls">
+			<input type="text" name="metal" class="input-mini" value="{{s.metal}}"/>%
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.text_cristal}}</label>
+		<div class="controls">
+			<input type="text" name="cristal" class="input-mini" value="{{s.cristal}}"/>%
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.text_tetranium}}</label>
+		<div class="controls">
+			<input type="text" name="tetranium" class="input-mini" value="{{s.tetranium}}"/>%
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			{% if s is defined %}
+				<a href="#" click="admin:modifTerrains" class="btn btn-primary" terrains_id="{{s.id}}">
+					{{_lang.modify}}
+				</a>
+			{% else %}
+				<a href="#" click="admin:createTerrains" class="btn btn-primary">
+					{{_lang.create}}
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</form>

@@ -1,0 +1,26 @@
+<ul class="thumbnails">
+{% set i = 0 %}
+{% for civil in civils %}
+	{% if civil.number > 0 %}
+		{% if i % 3 == 0 and i > 0 %}
+			</ul>
+			<ul class="thumbnails">
+		{% endif %}
+				  <li class="span4">
+				    	<div class="thumbnail">
+							<img src="/public/images/{{civil.avatar}}" class="avatar_large img-polaroid"/>
+							<h3>{{civil.nom}}</h3>
+							<hr />
+							<ul class="nav nav-pills">
+								<li>
+									<a href="#" class="label label-inverse">
+										<img src="/public/images/icons/icon-shield-white.png" /> {% if civil.vie is defined %}{{civil.vie}}{% else %}{{civil.defense_base}}{% endif %}
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+		{% set i = i + 1 %}
+	{% endif %}
+{% endfor %}
+</ul>

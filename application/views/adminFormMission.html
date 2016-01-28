@@ -1,0 +1,69 @@
+<form {% if s is defined %}id="mission_form_{{s.id}}"{%else%} id="mission_new"{%endif%} method="POST" action="#" class="form-horizontal {% if s is not defined %}off{%endif%}">
+	{% if s is defined %}
+		<input type="hidden" name="id" value="{{s.id}}" />
+	{% endif %}
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_name}}</label>
+		<div class="controls">
+			<input type="text" name="title" value="{{s.title}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_avatar}}</label>
+		<div class="controls">
+			<input type="text" name="avatar" value="{{s.avatar}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_code}}</label>
+		<div class="controls">
+			<input type="text" name="code" value="{{s.code}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_mission_type}}</label>
+		<div class="controls">
+			<select name="mission_type">
+				<option value="tutorial">Tutorial</option>
+				<option value="campagne">Campagne</option>
+			</select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_type}}</label>
+		<div class="controls">
+			<select name="type">
+				<option value='espionnage'>Espionnage</option>
+				<option value='construction'>Construction</option>
+				<option value='attaque'>Attaque</option>
+				<option value='defense'>Defense</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_description}}</label>
+		<div class="controls">
+			<textarea name="description">{{s.description|nl2br}}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_objectif}}</label>
+		<div class="controls">
+			<textarea name="objectif">{{s.objectif|nl2br}}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			{% if s is defined %}
+				<a href="#" click="admin:modifMission" class="btn btn-primary" mission_id="{{s.id}}">
+					{{_lang.modify}}
+				</a>
+			{% else %}
+				<a href="#" click="admin:createMission" class="btn btn-primary">
+					{{_lang.create}}
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</form>

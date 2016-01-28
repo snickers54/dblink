@@ -1,0 +1,47 @@
+<div id="editPlanet" class="modal hide fade in">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>{{_lang.planet_edit}}</h3>
+	</div>
+	<div class="modal-body">
+		<div class="well">
+			<span class="label">{{_lang.planet_change_name}}</span>
+			<br />
+			<input type="text" class="input-xlarge" value="{{_planet.nom | raw}}" name="nom_planet"/>
+			<span class="label">{{_lang.planet_change_note}}</span>
+			<br />
+			<textarea class="input-xlarge" name="note_planet">{{_planet.note | raw}}</textarea>
+			<br />
+			<a href="#" class="btn pull-right" click="home:editPlanet">{{_lang.modify}}</a>
+		</div>
+		{% include 'modal_productivity.html' %}
+	</div>
+</div>
+
+<div id="planetAvatar" class="modal hide fade in">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>{{_lang.planet_change_avatar}}</h3>
+	</div>
+	<div class="modal-body">
+		<div class="row-fluid">
+			{% for avatar in _planet_avatar %}
+				<div class="well {% if avatar.got == true %}cursor{%endif%}" {% if avatar.got == true %}click="home:changeAvatarPlanet" image="{{avatar.image}}"{%endif%}>
+					<div class="row-fluid">
+						<div class="span4">
+							<img src="{{avatar.image_small}}"/>
+						</div>
+						<div class="span8">
+							{% if avatar.got != true %}
+								<p>{{_lang.buy_avatar_planet_desc}}</p>
+								<a href="#" class="btn btn-success" click="home:buyAvatarPlanet" image="{{avatar.image}}">
+									<img src="/public/images/caddie.png" />
+								</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

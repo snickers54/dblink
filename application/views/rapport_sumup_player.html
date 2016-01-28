@@ -1,0 +1,57 @@
+<div class="row-fluid">
+	<div class="span5">
+		<div class="pull-left">
+			<img src="{{user_from.avatar}}" class="avatar_normal img-polaroid"/>
+			<ul class="nav nav-list">
+				<li class="nav-header">
+					<a href="/user/index?user_id={{user_from.user_id}}" class="label label-inverse">
+						<i class="icon-user icon-white"></i> {{user_from.login}}
+					</a>
+				</li>
+				<li>
+					<a href="#" class="label label-inverse">
+						<i class="icon-chevron-up icon-white"></i> {{user_from.grade}}
+					</a>
+				</li>
+				{% if alliance_from is defined %}
+					<li>
+						<a href="#" class="label label-inverse">
+							<i class="icon-flag icon-white"></i> {{alliance_from.nom}}
+						</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="span2">
+		<h1 class="center versus">&rarr;</h1>
+	</div>
+
+	<div class="span5">
+		<div class="pull-right">
+			<img src="{{user_to.avatar}}" class="avatar_normal img-polaroid"/>
+			<ul class="nav nav-list">
+				<li class="nav-header">
+					<a href="/user/index?user_id={{user_to.user_id}}" class="label label-inverse">
+						<i class="icon-user icon-white"></i> {{user_to.login}}
+					</a>
+				</li>
+				<li>
+					<a href="#" class="label label-inverse">
+						<i class="icon-chevron-up icon-white"></i> {{user_to.grade}}
+					</a>
+				</li>
+				{% if alliance_to is defined %}
+					<li>
+						<a href="#" class="label label-inverse">
+							<i class="icon-flag icon-white"></i> {{alliance_to.nom}}
+						</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+
+</div>
+<hr />

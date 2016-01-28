@@ -1,0 +1,19 @@
+<h2>{{_lang.title_attack}} [{{planet.nom}}]</h2>
+<hr />
+<form method="POST" action="/move/doAttack" id="move_flotte">
+<ul class="nav nav-pills">
+	<li><a href="#" class="label label-inverse pop" data-placement="left" data-content="{{_lang.move_needs_tetranium}}" data-original-title="{{_lang.move_needs_tetranium_title}}"><img src="/public/images/icons/icon-tetranium-white.png" /> <span id="conso_tetranium">0</span></a></a></li>
+	<li><a href="#" class="label label-inverse pop" data-placement="top" data-content="{{_lang.move_needs_time}}" data-original-title="{{_lang.move_needs_time_title}}"><i class="icon-time icon-white"></i> <span id="conso_time">{{time|totime}}</span></a></li>
+	<li><a href="#" class="label label-inverse pop" data-placement="bottom" data-content="{{_lang.move_needs_distance}}" data-original-title="{{_lang.move_needs_distance_title}}"><i class="icon-resize-horizontal icon-white"></i> <span id="conso_distance">{{distance|todistance|raw}}</span></a></li>
+	<li><a href="#" class="label label-inverse pop" data-placement="right" data-content="{{_lang.move_needs_stockage}}" data-original-title="{{_lang.move_needs_stockage_title}}"><img src="/public/images/icons/icon-cargo-white.png" /> <span id="conso_stockage">0</span></a></li>
+</ul>
+	<a href="#" class="btn btn-danger pull-right" click="board:sendFlotte"><b>{{_lang.attack}}</b></a>
+	<select name="behavior_type">
+		<option value="fight_safe" selected="selected">{{_lang.combat_fight_safe}}</option>
+		<option value="fight_death">{{_lang.combat_fight_death}}</option>
+		<option value="fight_ships">{{_lang.combat_fight_ships}}</option>
+		<option value="fight_defenses">{{_lang.combat_fight_defenses}}</option>
+	</select>
+<hr />
+	{% include 'desk_form_vaisseaux.html' %}
+</form>

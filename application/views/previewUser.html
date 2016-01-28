@@ -1,0 +1,24 @@
+{% if user is defined %}
+	<div class="well">
+		<div class="row-fluid">
+			<div class="span4">
+				<img src="{{user.avatar}}" class="avatar_small img-polaroid" />
+			</div>
+			<div class="span8">
+				<ul class="nav nav-list">
+					<li><a href="/user/index?user_id={{user.user_id}}" class="label label-inverse"><i class="icon-user icon-white"></i> {{user.login | capitalize}}</a></li>
+					<li><a href="#" class="label label-inverse"><i class="icon-chevron-up icon-white"></i> {{user.grade}}</a></li>
+					{% if alliance is defined %}
+						<li><a href="#" class="label label-inverse"><i class="icon-flag icon-white"></i> {{alliance.nom}}</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+		<div>
+			<a href="/user/mailNew?author={{user.user_id}}"><img src="/public/images/mail.png" /></a>
+			{% if already_friends != true %}
+				<a href="#" click="home:addFriend" user_id="{{user.user_id}}"><i class="icon-plus icon-white"></i></a>
+			{% endif %}
+		</div>
+	</div>
+{% endif %}

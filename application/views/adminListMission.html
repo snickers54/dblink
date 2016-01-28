@@ -1,0 +1,35 @@
+<div class="row-fluid">
+	<div class="span8 well">
+		{% include 'adminFormMission.html' %}
+		{% for s in mission %}
+			<div id="mission_{{s.id}}" class="off mission">
+				<div class="page-header"> 
+					<h2>{{s.title}}
+						<a href="#" mission_id="{{s.id}}" class="btn btn-danger pull-right" click="admin:deleteMission">
+							<i class="icon-remove icon-white"></i> {{_lang.delete}}
+						</a>
+					</h2>
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+						<img src="{{s.avatar}}" class="avatar_large img-polaroid"/>
+					</div>
+					<div class="span8">
+						{% include 'adminFormMission.html' %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="span4 well">
+		<ul class="nav nav-list" id="mission_list">
+			<li><a href="#" class="btn btn-primary" click="admin:newMission">{{_lang.create}}</a></li>
+			<li class="nav-header">{{_lang.title_mission}}</li>
+			{% for s in mission %}
+				<li click="admin:loadMission" mission_id="{{s.id}}">
+					<a href="#" class="label label-inverse">{{s.title}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>

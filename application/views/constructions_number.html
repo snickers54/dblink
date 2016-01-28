@@ -1,0 +1,162 @@
+{% set number = b.number %}
+{% if b.number is not defined %}
+	{% set number = 0 %}
+{% endif %}
+<div class="well">
+	<div class="row-fluid {% if b.dependencies != FALSE %}requirement tTip{%endif%}" title="{{b.dependencies}}">
+		<div class="span3">
+			<img src="/public/images/{{b.avatar}}" class="avatar_large img-polaroid" />
+		</div>
+		<div class="span9">
+				<ul class="nav nav-pills">
+				<li>
+					<a href="#" class="label label-inverse">
+						{{number}} {{b.nom}}
+					</a>
+				</li>
+				{% if b.attaque_base is defined and b.attaque_base > 0 %}
+				<li>
+					<a href="#" class="label label-inverse">
+						<img src="/public/images/icons/icon-attack-white.png" /> {{b.attaque_base}}
+					</a>
+				</li>
+				{%endif%}
+				<li>
+					<a href="#" class="label label-inverse">
+						<img src="/public/images/icons/icon-shield-white.png" /> {% if b.vie is defined %}{{b.vie}}{% else %}{{b.defense_base}}{% endif %}
+					</a>
+				</li>
+				{% if b.dependencies == FALSE and (b.level < b.level_max or b.level_max == 0)%}
+					<li class="pull-right">
+						<div class="input-append">
+							<input style="width:35px" type="text" placeHolder="0">
+							<button class="btn btn-info" type="button" building_code="{{b.code}}" click="constructions:numberUp">
+								<i class="icon-shopping-cart icon-white"></i>
+								{{_lang.building_construct}}
+							</button>
+						</div>
+					</li>
+				{% endif %}
+			</ul>
+			<hr />
+			<ul class="nav nav-pills">
+				<li>
+					<a href="#" class="label label-inverse">
+						<i class="icon-minus icon-white"></i>
+					</a>
+				</li>	
+				{% if b.metaux_base > 0 %}
+					<li>
+						<a href="#" class="label {% if b.metaux_base > _ressources.metaux %}label-important{%else%}label-inverse{%endif%}">
+							{{"metal"|convertIcons|raw}} <span>{{b.metaux_base}}</span>
+						</a>
+					</li>
+				{% endif %}
+			
+				{% if b.cristaux_base > 0 %}
+					<li>
+						<a href="#" class="label {% if b.cristaux_base > _ressources.cristaux %}label-important{%else%}label-inverse{%endif%}">
+							{{"cristal"|convertIcons|raw}} <span>{{b.cristaux_base}}</span>
+						</a>
+					</li>
+				{% endif %}
+
+				{% if b.tetranium_base > 0 %}
+					<li>
+						<a href="#" class="label {% if b.tetranium_base > _ressources.tetranium %}label-important{%else%}label-inverse{%endif%}">
+							{{"tetranium"|convertIcons|raw}} <span>{{b.tetranium_base}}</span>
+						</a>
+					</li>
+				{% endif %}
+
+				{% if b.population_base > 0 %}
+					<li>
+						<a href="#" class="label {% if b.population_base > _ressources.population %}label-important{%else%}label-inverse{%endif%}">
+							{{"population"|convertIcons|raw}} <span>{{b.population_base}}</span>
+						</a>
+					</li>
+				{% endif %}
+				{% if b.energie_current > 0 %}
+					<li>
+						<a href="#" class="label {% if b.energie_current > _ressources.energie %}label-important{%else%}label-inverse{%endif%}">
+							{{"energie"|convertIcons|raw}} <span>{{b.energie_current}}</span>
+						</a>
+					</li>
+				{% endif %}
+				<li>
+					<a href="#" class="label label-inverse">
+						<i class="icon-time icon-white"></i> {{b.construction_time|totime}}
+					</a>
+				</li>
+			</ul>
+			{% if b.metaux_grow_produced is defined or b.cristaux_grow_produced or b.tetranium_grow_produced or b.energie_produced or
+				b.limit_metaux_produced or b.limit_cristaux_produced or b.limit_tetranium_produced or b.limit_population_produced %}
+				<ul class="nav nav-pills">
+					<li>
+						<a href="#" class="label label-inverse">
+							<i class="icon-plus icon-white"></i>
+						</a>
+					</li>
+					{% if b.metaux_grow_produced is defined %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"metal"|convertIcons|raw}} <span>{{b.metaux_grow_produced}} / h</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if b.cristaux_grow_produced is defined %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"cristal"|convertIcons|raw}} <span>{{b.cristaux_grow_produced}} / h</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if b.tetranium_grow_produced is defined %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"tetranium"|convertIcons|raw}} <span>{{b.tetranium_grow_produced}} / h</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if b.energie_produced is defined %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"energie"|convertIcons|raw}} <span>{{b.energie_produced}}</span>
+							</a>
+						</li>
+					{% endif %}
+
+					{% if b.limit_metaux_produced is defined %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"lmetal"|convertIcons|raw}} <span>{{b.limit_metaux_produced}}</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if b.limit_cristaux_produced is defined %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"lcristal"|convertIcons|raw}} <span>{{b.limit_cristaux_produced}}</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if b.limit_population_produced is defined %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"lpopulation"|convertIcons|raw}} <span>{{b.limit_population_produced}}</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if b.limit_tetranium_produced is defined %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"ltetranium"|convertIcons|raw}} <span>{{b.limit_tetranium_produced}}</span>
+							</a>
+						</li>
+					{% endif %}
+				</ul>
+				{% endif %}
+			<blockquote>{{b.texte | raw | nl2br}}</blockquote>
+		</div>
+	</div>
+</div>

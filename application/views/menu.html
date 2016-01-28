@@ -1,0 +1,97 @@
+{% include 'modal_login.html' %}
+{% include 'modal_admin.html' %}
+{% include 'modal_prefs.html' %}
+{% include 'modal_race.html' %}
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/index/index">DBLINK</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li><a href="/index/news">{{_lang.news}}</a></li>
+                    {% if isLogged == true %}
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {{_lang.board}}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/board/empire">{{_lang.empire}}</a></li>
+                            <li><a href="/board/constructions">{{_lang.building}}</a></li>
+                            <li><a href="/board/missions">{{_lang.mission}}</a></li>
+                            <li><a href="/move/index">{{_lang.move}}</a></li>
+                            <li><a href="/board/rapports">{{_lang.rapport}}</a></li>
+                            {% if _batiments.centre_espionnage is defined and _batiments.centre_espionnage.level > 0 %}
+                                <li><a href="/board/spycenter">{{_lang.spy_center}}</a></li>
+                            {% endif %}
+                            {% if _batiments.chambre_commerce is defined and _batiments.chambre_commerce.level > 4 %}
+                                <li><a href="/bourse/index">{{_lang.bourse}}</a></li>
+                            {% endif %}
+                            <li><a href="/board/galaxy">{{_lang.map}}</a></li>
+                        </ul>
+                    </li>
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {{_lang.community}}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/mails">{{_lang.messagerie}}</a></li>
+                            {% if _alliance is defined %}
+                                <li><a href="/alliance/myAlly">{{_lang.my_ally}}</a></li>
+                            {% endif %}
+                            <li><a href="/alliance/index">{{_lang.ally}}</a></li>
+                            <li><a href="/user/stats">{{_lang.stats}}</a></li>
+                            <li><a href="/user/index">{{_lang.profil}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/shop/index">
+                            {{_lang.shop}}
+                        </a>
+                    </li>
+                    <li><a href="/forum">{{_lang.forum}}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {{_lang.help}}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/index/team">{{_lang.team}}</a></li>
+                            <li><a href="/user/mailNew?author=1">{{_lang.contact}}</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a href="#">{{_lang.inscription}}</a></li>
+                    <li><a href="#connexion" data-toggle="modal">{{_lang.connexion}}</a></li>
+                    {% endif %}
+                </ul>
+                {% if isLogged == true %}
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img class="avatar_tiny" src="{{_user.avatar}}" alt="profil"/>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if _user.config.isAdmin %}
+                                <li><a href="#editAdmin" data-toggle="modal"><i class="icon-lock icon-white"></i> {{_lang.admin}}</a></li>
+                            {% endif %}
+                            <li><a href="#editUser" data-toggle="modal"><i class="icon-user icon-white"></i> {{_lang.account}}</a></li>
+                            <li><a href="#editPrefs" data-toggle="modal"><i class="icon-wrench icon-white"></i> {{_lang.prefs}}</a></li>
+                            <li><a href="/user/logout"><i class="icon-off icon-white"></i> {{_lang.deconnexion}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+

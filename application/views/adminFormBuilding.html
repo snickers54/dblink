@@ -1,0 +1,138 @@
+<form {% if b is defined %}id="building_form_{{b.id}}"{%else%} id="building_new"{%endif%} method="POST" action="#" class="form-horizontal {% if b is not defined %}off{%endif%}">
+	{% if b is defined %}
+		<input type="hidden" name="id" value="{{b.id}}" />
+	{% endif %}
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_name}}</label>
+		<div class="controls">
+			<input type="text" name="nom" value="{{b.nom}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_avatar}}</label>
+		<div class="controls">
+			<input type="text" name="avatar" value="{{b.avatar}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_code}}</label>
+		<div class="controls">
+			<input type="text" name="code" value="{{b.code}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_defense}}</label>
+		<div class="controls">
+			<input type="text" name="defense_base" value="{{b.defense_base}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_attaque}}</label>
+		<div class="controls">
+			<input type="text" name="attaque_base" value="{{b.attaque_base}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_attaque_number}}</label>
+		<div class="controls">
+			<input type="text" name="attaque_nb" value="{{b.attaque_nb}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_max}}</label>
+		<div class="controls">
+			<input type="text" name="level_max" value="{{b.level_max}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_cost}}</label>
+		<div class="controls">
+			<input type="text" name="cost_augmentation" value="{{b.cost_augmentation}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_metaux}}</label>
+		<div class="controls">
+			<input type="text" name="metaux_base" value="{{b.metaux_base}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_cristaux}}</label>
+		<div class="controls">
+			<input type="text" name="cristaux_base" value="{{b.cristaux_base}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_population}}</label>
+		<div class="controls">
+			<input type="text" name="population_base" value="{{b.population_base}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_tetranium}}</label>
+		<div class="controls">
+			<input type="text" name="tetranium_base" value="{{b.tetranium_base}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_energie}}</label>
+		<div class="controls">
+			<input type="text" name="energie_base" value="{{b.energie_base}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_stockage}}</label>
+		<div class="controls">
+			<input type="text" name="stockage_unite" value="{{b.stockage_unite}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_requirement}}</label>
+		<div class="controls">
+			<input type="text" name="requirement" value="{{b.requirement}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_factor}}</label>
+		<div class="controls">
+			<input type="text" name="factor_time" value="{{b.factor_time}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_change}}</label>
+		<div class="controls">
+			<input type="text" name="ressources_change" value="{{b.ressources_change}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_description}}</label>
+		<div class="controls">
+			<textarea name="texte">{{b.texte | nl2br}}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_type}}</label>
+		<div class="controls">
+			<select name="type">
+				<option value="batiments" {% if b.type == "batiments"%}selected="selected"{%endif%}>{{_lang.building_batiments}}</option>
+				<option value="technologie" {% if b.type == "technologie"%}selected="selected"{%endif%}>{{_lang.building_technologies}}</option>
+				<option value="defensif" {% if b.type == "defensif"%}selected="selected"{%endif%}>{{_lang.building_defenses}}</option>
+				<option value="civils" {% if b.type == "civils"%}selected="selected"{%endif%}>{{_lang.building_civils}}</option>
+				<option value="vaisseaux" {% if b.type == "vaisseaux"%}selected="selected"{%endif%}>{{_lang.building_vaisseaux}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			{% if b is defined %}
+				<a href="#" click="admin:modifBuilding" class="btn btn-primary" building_id="{{b.id}}">
+					{{_lang.modify}}
+				</a>
+			{% else %}
+				<a href="#" click="admin:createBuilding" class="btn btn-primary">
+					{{_lang.create}}
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</form>

@@ -1,0 +1,19 @@
+<div class="span3">
+		{% if isLogged == true %}
+			<div id="block_shortcut_left">
+				{% include 'block_shortcut_left.html' %}
+			</div>
+			<div id="block_planet_left">
+				{% include 'block_planet_left.html' %}
+			</div>
+			<div id="block_user_left">
+				{% include 'block_user_left.html' %}
+			</div>
+		{% endif %}
+</div>
+
+{# Modal pour editer l'user #}
+{% include 'modal_user.html' %}
+
+{# Modal pour editer la planete #}
+{% include 'modal_planet.html' %}

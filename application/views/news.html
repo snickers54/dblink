@@ -1,0 +1,29 @@
+<div class="row-fluid">
+  <div class="span8">
+    {% for value in news %}
+      {% set time = value.time_end - current_timestamp %}
+      <div class="well">
+        <h2><em>{{value.titre}}</em></h2>
+        <blockquote><p class="text-info">{{value.texte|raw|nl2br}}</p></blockquote>
+        <small><em><span class="label label-inverse"><i class="icon-user icon-white"></i> {{value.auteur}}</span> <span class="pull-right label label-inverse"><i class="icon-time icon-white"></i> {{value.time | date("d/m/Y")}}</span></em></small>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="span4">
+    {% for e in events %}
+      <div class="well">
+        <h3><em>{{e.titre | capitalize}}</em></h3>
+        <hr />
+        <div class="current_event current" time_start="{{e.time}}" time_end="{{e.time_end}}" event_id="{{e.id}}">
+          <div class='progress progress-notice progress-striped active'>
+            <div class='bar bar_compteur_ajax_event{{e.id}}'></div>
+            <span class='timebar'>
+              <compter id='compteur_ajax_event{{e.id}}'></compter>
+            </span>
+          </div>
+        </div>
+        <blockquote class="text-info">{{e.texte}}</blockquote>
+      </div>
+    {% endfor %}
+  </div>
+</div>

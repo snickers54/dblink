@@ -1,0 +1,16 @@
+{% if mp is defined %}
+	<p id_message="{{mp.id}}">
+		<a href="#" class="btn" click="mails:listMail">&larr;</a>
+		<a href="#" class="btn" click="mails:answer">{{_lang.mail_answer}}</a>
+		<a href="#" class="btn" click="mails:delete">{{_lang.mail_delete}}</a>
+	</p>
+{% elseif mails is defined %}
+	<p>
+		<a href="#" class="btn" click="mails:new">{{_lang.mail_new}}</a>
+		<a href="#" class="btn" click="mails:deleteAll">{{_lang.mail_delete}}</a>
+	</p>
+{% else %}
+	<p>
+		<a href="#" class="btn" click="mails:listMail">&larr;</a>
+	</p>
+{% endif %}

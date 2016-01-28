@@ -1,0 +1,32 @@
+<div class="rapport">
+	<p>&nbsp;</p>
+	<ul class="nav nav-pills">
+		<li><a href="#" class="label label-inverse"><i class="icon-user icon-white"></i> {{login}}</a></li>
+		<li><a href="#" class="label label-inverse"><i class="icon-globe icon-white"></i> {{planete_name}}</a></li>
+		<li><a href="#" class="label label-inverse"><i class="icon-time icon-white"></i> {{json.timestamp | date("d/m/Y à H:m")}}</a></li>
+	</ul>
+	<hr />
+	<div class="row-fluid">
+		<div class="span4">
+			{% if json.vaisseaux is defined %}
+				<h3>{{_lang.building_vaisseaux}}</h3>
+				{% set b = json.vaisseaux %}
+				{% include 'rapport_empire_block.html' %}
+			{% endif %}
+		</div>
+		<div class="span4">
+			{% if json.defenses is defined %}
+				<h3>{{_lang.building_defenses}}</h3>
+				{% set b = json.defenses %}
+				{% include 'rapport_empire_block.html' %}
+			{% endif %}
+		</div>
+		<div class="span4">
+			{% if json.civils is defined %}
+				<h3>{{_lang.building_civils}}</h3>
+				{% set b = json.civils %}
+				{% include 'rapport_empire_block.html' %}
+			{% endif %}
+		</div>
+	</div>
+</div>

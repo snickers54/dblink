@@ -1,0 +1,41 @@
+<ul class="thumbnails">
+{% set i = 0 %}
+{% for vaisseau in vaisseaux %}
+	{% if vaisseau.number > 0 %}
+		{% if i % 3 == 0 and i > 0 %}
+			</ul>
+			<ul class="thumbnails">
+		{% endif %}
+				  <li class="span4">
+				    	<div class="thumbnail">
+							<img src="/public/images/{{vaisseau.avatar}}" class="avatar_large img-polaroid"/>
+							<h3>{{vaisseau.nom}}</h3>
+							<hr />
+							<ul class="nav nav-pills">
+								{% if vaisseau.attaque is defined %}
+								<li>
+									<a href="#" class="label label-inverse">
+										<img src="/public/images/icons/icon-attack-white.png" /> {{vaisseau.attaque}}
+									</a>
+								</li>
+								{%endif%}
+								
+								<li>
+									<a href="#" class="label label-inverse">
+										<img src="/public/images/icons/icon-shield-white.png" /> {% if vaisseau.vie is defined %}{{vaisseau.vie}}{% else %}{{vaisseau.defense_base}}{% endif %}
+									</a>
+								</li>
+								{% if vaisseau.stockage_unite is defined %}
+								<li>
+									<a href="#" class="label label-inverse">
+										<img src="/public/images/icons/icon-cargo-white.png" /> {{vaisseau.stockage_unite}}
+									</a>
+								</li>
+								{% endif %}
+							</ul>
+						</div>
+					</li>
+		{% set i = i + 1 %}
+	{% endif %}
+{% endfor %}
+</ul>

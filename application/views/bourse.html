@@ -1,0 +1,17 @@
+<div class="row-fluid">
+	<div class="span8">
+		<div class="well">
+			<h2>{{_lang.bourse}}</h2>
+			<hr />
+			<div id="myactions">
+				{% include 'myactions.html' %}
+			</div>
+		</div>
+		{% include 'bourse_charts.html' %}
+	</div>
+	<div class="span4">
+		{% include 'bourse_buy.html' %}
+		{% include 'bourse_sell.html' %}
+		{% include 'bourse_exchange.html' %}
+	</div>
+</div>

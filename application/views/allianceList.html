@@ -1,0 +1,22 @@
+<div class="well">
+<table class="table">
+	<tr>
+		<th>#</th>
+		<th>nom</th>
+		<th>tag</th>
+		<th>nombre de membres</th>
+		<th>actions</th>
+	</tr>	
+{% set i = 1 %}
+{% for l in allianceList %}
+<tr>
+	<td>{{i}}</td>
+	<td>{{l.nom}}</td>
+	<td>{{l.tag}}</td>
+	<td>{{l.nb_membre}}</td>
+	<td><a href="/alliance/viewAlly?id={{l.id}}" class="twipright" data-original-title="Visiter"><i class="icon-eye-open icon-white"></i> </a> | <a href="/alliance/requestAlly?id={{l.id}}"><i class="icon-tags icon-white"></i></td>
+</tr>
+{%set i = i + 1%}
+{% endfor %}
+</table>
+</div>

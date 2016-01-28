@@ -1,0 +1,35 @@
+<div class="row-fluid">
+	<div class="span8 well">
+		{% include 'adminFormTerrains.html' %}
+		{% for s in terrains %}
+			<div id="terrains_{{s.id}}" class="off terrains">
+				<div class="page-header"> 
+					<h2>{{s.nom}} {{s.metal}}% {{_lang.text_metal}} {{s.cristal}}% {{_lang.text_cristal}} {{s.tetranium}}% {{_lang.text_tetranium}}
+						<a href="#" terrains_id="{{s.id}}" class="btn btn-danger pull-right" click="admin:deleteTerrains">
+							<i class="icon-remove icon-white"></i> {{_lang.delete}}
+						</a>
+					</h2>
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+						<img src="/public/images/{{s.avatar}}" class="avatar_medium img-polaroid"/>
+					</div>
+					<div class="span8">
+						{% include 'adminFormTerrains.html' %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="span4 well">
+		<ul class="nav nav-list" id="terrains_list">
+			<li><a href="#" class="btn btn-primary" click="admin:newTerrains">{{_lang.create}}</a></li>
+			<li class="nav-header">{{_lang.title_terrains}}</li>
+			{% for s in terrains %}
+				<li click="admin:loadTerrains" terrains_id="{{s.id}}">
+					<a href="#" class="label label-inverse">{{s.nom}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>

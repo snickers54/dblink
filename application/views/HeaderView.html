@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{lang}}" lang="{{lang}}">
+	<head>
+   <title>
+    DBLINK
+   </title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   {{  cssArray|raw  }}
+   <!--<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />-->
+   </head>
+<body>
+   {{  jsArray|raw  }}
+  <div id="mask" class="off cursor" click="chat:toggleChat"></div>
+  <div id='loader'><img src='/public/images/loader.gif' /><span><br /><br />Loading</span></div>
+  {% include 'menu.html' %}
+  <div class="container-fluid" id="main-content">
+    {% if __error is defined or __success is defined or __achievement is defined %}
+      <div class="row-fluid notifications">
+        <div class="span12">
+        {%  if __achievement is defined %}
+          <div class="alert alert-info">
+            <div class="row-fluid">
+              <div class="span1">
+                <img src="/public/images/avatar/robotdblink.jpg" class="avatar_medium label label-inverse"/>
+               </div>
+               <div class="span11">
+                <b>{{  __achievement.msg|raw}}</b>
+              </div>
+            </div>
+             </div>
+          </div>
+        {% endif %}
+        {%  if __error is defined %}
+          <div class="alert alert-error">
+            <div class="row-fluid">
+              <div class="span1">
+                <img src="/public/images/avatar/robotdblink.jpg" class="avatar_medium label label-inverse"/>
+               </div>
+               <div class="span11">
+                <b>{{  __error|raw}}</b>
+              </div>
+            </div>
+             </div>
+          </div>
+        {% endif %}
+        {% if __success is defined %}
+          <div class="alert alert-success">
+            <div class="row-fluid">
+              <div class="span1">
+                <img src="/public/images/avatar/robotdblink.jpg" class="avatar_medium label label-inverse"/>
+              </div>
+              <div class="span11">
+             <b>{{  __success|raw}}</b>
+           </div>
+         </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% include 'chat_center.html' %}
+    <div class="row-fluid">
+      <div id="block_left">
+      {% include 'block_left.html' %}
+      </div>
+      <div class="span9" id="view_content">

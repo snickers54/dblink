@@ -1,0 +1,36 @@
+<div class="span2">
+	<ul class="nav nav-list">
+		<li class="nav-header">
+			&nbsp;{{mail.login}}
+		</li>
+		<li>
+			<a href="/user/index?user_id={{mail.from_user_id}}">
+				<img src="{{mail.avatar}}" alt="{{mail.login}}" class="avatar_medium label label-inverse"/>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="span10">
+	<ul class="nav nav-pills">
+		<li>
+			<a href="#" class="label label-inverse">{{mail.objet}}</a>
+		</li>
+		<li class="pull-right">
+			<a href="#" class="label label-inverse">{{mail.date}}</a>
+		</li>
+	</ul>
+	&nbsp;{{_lang.mail_to}}&nbsp;
+	{% set i = 0 %}
+	{% for receiver in mail.receiver %}
+		{% if i > 0 %}
+			,
+		{% endif %}
+		<b>{{receiver.login | capitalize}}</b>
+		{% set i = i + 1 %}
+	{% endfor %}
+	<hr />
+	<blockquote>{{mail.texte | raw | nl2br}}</blockquote>
+	{% if mail.signature|length > 0 %}
+		<i>{{mail.signature}}</i>
+	{% endif %}
+</div>

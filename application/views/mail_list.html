@@ -1,0 +1,36 @@
+{% include 'mail_button.html' %}
+<div class="well">
+	<table id="list_mails" class="table table-hover">
+		<thead>
+			<tr>
+				<th><i click="mails:checkAll" class="cursor icon-trash icon-white"></i></th>
+				<th><i class="icon-info-sign icon-white"></i></th>
+				<th><i class="icon-user icon-white"></i></th>
+				<th><i class="icon-time icon-white"></i></th>
+				<th>#</th>
+			</tr>
+		</thead>
+		{% for mail in mails %}
+			{% if mail.from_user_id != user.user_id or (mail.from_user_id == user.user_id and mail.children > 0) %}
+			<tr mail_id="{{mail.id}}">
+				<td><input type="checkbox" value="{{mail.id}}"/></td>
+				<td class="cursor" click="mails:childrenMail">{{mail.objet}}</td>
+				<td class="cursor" click="mails:childrenMail">{{mail.login}}</td>
+				<td class="cursor" click="mails:childrenMail">{{mail.date}}</td>
+				<td class="cursor" click="mails:childrenMail">
+					{% set label = '' %}
+					{% set nb_new = 0 %}
+					{% if mail.nb_new > 0 %}
+						{% set nb_new = '+'~mail.nb_new %}
+						{% set label = 'label-important' %}
+					{% elseif mail.nb_new == 0 and mail.statut == 'new' %}
+						{% set nb_new = 'new' %}
+						{% set label = 'label-important' %}
+					{%endif%}
+					<a href="#" class="label {{label}}">{{nb_new}}</a>
+				</td>
+			</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+</div>

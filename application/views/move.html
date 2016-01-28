@@ -1,0 +1,100 @@
+<div class="row-fluid" id="move_flotte">
+	<div class="span8">
+		{% for p in planetes %}
+			<div class="well">
+				<div class="row-fluid">
+					<div class="span3">
+						<h3>{{p.nom}}</h3>
+						<img src="/public/images/planete/{{p.avatar}}" class="avatar_medium img-polaroid"/>
+					</div>
+					<div class="span9">
+						<h3>{{_lang.title_input_move}}</h3>
+						<hr />
+						{% for i in input %}
+							{% if i.to_planet_id == p.id %}
+								<div class="current off" time="{{((i.time_go + i.time_action + i.time_back) - (_current_time - i.start))}}" totaltime="{{(i.start + i.time_go + i.time_action + i.time_back) - i.start}}" move_id="{{i.id}}">
+									<div class="compteur">
+										
+									</div>
+								</div>
+							{% endif %}
+						{% endfor %}
+						<h3>{{_lang.title_output_move}}</h3>
+						<hr />
+						{% for o in output %}
+							{% if o.from_planet_id == p.id %}
+								<div class="row-fluid">
+									<div class="span3">
+										<img src="/public/images/planete/{{o.planet_avatar}}" class="avatar_medium img-polaroid"/>
+									</div>
+									<div class="span9">
+										<blockquote>
+											<h4>> {% if o.name_to | length > 0 %}{{o.name_to}}{%else%}G{{o.galaxie}}P{{o.planet_id}}{%endif%} 
+												<a href="/user/index?user_id={{o.to_user_id}}">[{{o.login}}]</a>
+												<span class="pull-right">#{{o.type}}</span>
+											</h4>
+											<div class="current off" time="{{((o.time_go + o.time_action + o.time_back) - (_current_time - o.start))}}" totaltime="{{(o.time_go + o.time_action + o.time_back)}}" move_id="{{o.id}}">
+												<div class="compteur">
+												
+												</div>
+											</div>
+											{% for v in o.vaisseaux %}
+												<a href="#" class="label label-success pop" data-placement="left" data-content='
+													<div class="row-fluid">
+														<div class="span6">
+															<img src="/public/images/{{v.avatar}}" class="avatar_small img-polaroid"/></div><div class="span6">
+															<ul class="nav nav-list">
+																<li>
+																	<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-attack-white.png" /> {{v.attaque_base}}</a>
+																</li>
+																<li>
+																	<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-shield-white.png" /> {{v.defense_base}}</a>
+																</li>
+																<li>
+																	<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-cargo-white.png" /> {{v.stockage_unite}}</a>
+																</li>
+															</ul>
+														</div>
+													</div>' data-original-title="{{v.nom}}">
+													{{v.number}} {{v.nom}}
+												</a>
+											{% endfor %}
+											{% if o.ressources|length > 0 %}
+												<ul class="nav nav-pills">
+													<li>
+														<a href="#" class="label label-inverse">
+															{{"metal"|convertIcons|raw}} {{o.ressources.metaux}}
+														</a>
+													</li>
+													<li>
+														<a href="#" class="label label-inverse">
+															{{"cristal"|convertIcons|raw}} {{o.ressources.cristaux}}
+														</a>
+													</li>
+													<li>
+														<a href="#" class="label label-inverse">
+															{{"tetranium"|convertIcons|raw}} {{o.ressources.tetranium}}
+														</a>
+													</li>
+													<li>
+														<a href="#" class="label label-inverse">
+															{{"population"|convertIcons|raw}} {{o.ressources.population}}
+														</a>
+													</li>
+												</ul>
+											{% endif %}
+										</blockquote>
+									</div>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="span4">
+		<div class="well">
+		</div>
+	</div>
+</div>

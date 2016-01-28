@@ -1,0 +1,42 @@
+<div class="row-fluid">
+	<div class="span8">
+		<div class="well">
+			{% for s in spy %}
+				<div class="row-fluid">
+					<div class="span3">
+						<img src="/public/images/planete/{{s.avatar}}" class="avatar_medium img-polaroid"/>
+					</div>
+					<div class="span9">
+						<h3> {{s.planet_name}} <a href="/user/index?user_id={{s.user_id}}">[{{s.login}}]</a>
+							<a href="/board/galaxy?galaxy={{s.galaxie}}" class="pull-right">#G{{s.galaxie}}</a>
+						</h3>
+						<ul class="nav">
+							<li>> {{_lang.spy_stay_since}}<span class="date" time="{{(s.start + s.time_go)}}"></span></li>
+							<li>> {{_lang.spy_stay_proba_discover}} {{s.chance}}%</li>
+						</ul>
+						<a href="/board/spy?planet_id={{s.to_planet_id}}" class="pull-right btn btn-danger">{{_lang.spy}}</a>
+					</div>
+				</div>
+				<hr />
+			{% endfor %}
+		</div>
+	</div>
+	<div class="span4">
+		<div class="well" id="scan">
+			<h3>{{_lang.spy_care_title}}</h3>
+			<hr />
+			<blockquote>
+				{{_lang.spy_care_text|raw}} <span class="label label-success">{{time_scan|totime}}</span>
+			</blockquote>
+			{% if scan is not defined %}
+				<a href="#" class="btn btn-primary pull-right" click="board:launchScan">{{_lang.spy_scanning}}</a>
+			{% else %}
+				<div class="current off" time="{{(scan.time_action - (_current_time - scan.time_start))}}" totaltime="{{(scan.time_action)}}">
+					<div class="compteur">
+						
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

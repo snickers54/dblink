@@ -1,0 +1,39 @@
+<div class="row-fluid">
+	<div class="span8">
+		<div class="well">
+			{% include 'stats_content.html' %}
+		</div>
+	</div>
+	<div class="span4">
+		<div class="well">
+			<select name="page_stats" change="stats:changePage" class="span12">
+				{% for i in range(0, max_page) %}
+					<option value="{{i}}" {%if i == current_page %}selected="selected"{%endif%}>Page : {{i}}</option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<div class="well" id="comparer">
+			<h3>{{_lang.stats_title_search}}</h3>
+			<hr />
+			<div class="control-group">
+				<form method="POST" id="form_comparer" action="">
+					<div class="controls receivers">
+					</div>
+				</form>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on label cursor label-inverse"><i class="icon-user icon-white"></i></span>
+						<input type="text" class="span11" name="autocomplete" id="stats_comparer" keyup="stats:completion"/>
+					</div>
+				</div>
+				<div class="controls completion_list">
+					<ul class="nav nav-list off">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

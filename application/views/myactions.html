@@ -1,0 +1,32 @@
+{% set energie = 0 %}
+{% set metal = 0 %}
+{% set cristal = 0 %}
+{% set tetranium = 0 %}
+
+{% for a in actions %}
+	{% if a.type == "metal" %}
+		{% set metal = metal + 1 %}
+	{% endif %}
+	{% if a.type == "cristal" %}
+		{% set cristal = cristal + 1 %}
+	{% endif %}
+	{% if a.type == "energie" %}
+		{% set energie = energie + 1 %}
+	{% endif %}
+	{% if a.type == "tetranium" %}
+		{% set tetranium = tetranium + 1 %}
+	{% endif %}
+{% endfor %}
+
+{% if metal > 0 %}
+	<span class="label label-inverse">{{metal}} {{_lang.bourse_actions}} {{_lang.text_metal}}</span>
+{% endif %}
+{% if cristal > 0 %}
+	<span class="label label-inverse">{{cristal}} {{_lang.bourse_actions}} {{_lang.text_cristal}}</span>
+{% endif %}
+{% if tetranium > 0 %}
+	<span class="label label-inverse">{{tetranium}} {{_lang.bourse_actions}} {{_lang.text_tetranium}}</span>
+{% endif %}
+{% if energie > 0 %}
+	<span class="label label-inverse">{{energie}} {{_lang.bourse_actions}} {{_lang.text_energie}}</span>
+{% endif %}

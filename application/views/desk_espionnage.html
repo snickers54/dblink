@@ -1,0 +1,30 @@
+<h2>{{_lang.title_spy}} [{{planet.nom}}]</h2>
+<hr />
+{% if isScanning is defined %}
+	<div class="alert alert-error">
+		{{_lang.spy_scan_running}}
+	</div>
+{% endif %}
+<div class="progress progress-striped active current">
+		<div class="bar" style="width: {{chance}}%;">
+			<span class="timebar">~{{chance}}% {{_lang.label_chance_success}}</span>
+		</div>
+</div>
+<a href="#" class="btn btn-danger pull-right" click="board:sendFlotte"><b>{{_lang.spy}}</b></a>
+<ul class="nav nav-pills">
+	{% if vaisseaux|length > 0 %}
+		<li><a href="#" class="label label-inverse pop" data-placement="left" data-content="{{_lang.move_needs_tetranium}}" data-original-title="{{_lang.move_needs_tetranium_title}}"><img src="/public/images/icons/icon-tetranium-white.png" /> <span id="conso_tetranium">0</span></a></a></li>
+		<li><a href="#" class="label label-inverse pop" data-placement="top" data-content="{{_lang.move_needs_time}}" data-original-title="{{_lang.move_needs_time_title}}"><i class="icon-time icon-white"></i> <span id="conso_time">{{time|totime}}</span></a></li>
+	{% endif %}
+	<li><a href="#" class="label label-inverse pop" data-placement="bottom" data-content="{{_lang.move_needs_distance}}" data-original-title="{{_lang.move_needs_distance_title}}"><i class="icon-resize-horizontal icon-white"></i> <span id="conso_distance">{{distance|todistance|raw}}</span></a></li>
+</ul>
+{% if vaisseaux|length > 0 %}
+	<select name="behavior_type">
+		<option value="spy_stay" selected="selected">{{_lang.spy_stay}}</option>
+		<option value="spy_back">{{_lang.spy_back}}</option>
+	</select>
+{% endif %}
+<hr />
+<form method="POST" action="/move/doSpy" id="move_flotte">
+	{% include 'desk_spy_form.html' %}
+</form>

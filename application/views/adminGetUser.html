@@ -1,0 +1,109 @@
+<div class="page-header"> 
+	<h2>{% if u.connected == "yes" %}<span class="badge badge-success"></span>{%endif%} &nbsp;{{u.login}} - {{u.nom | capitalize}} {{u.prenom | capitalize}}
+		<a href="#" user_id="{{u.user_id}}" class="btn btn-danger pull-right" click="admin:deleteUser">
+			<i class="icon-remove icon-white"></i> {{_lang.delete}}
+		</a>
+		{% if u.active != "1" %}
+			<a href="#" user_id="{{u.user_id}}" class="btn btn-success pull-right" click="admin:activateUser">
+				<i class="icon-ok icon-white"></i> {{_lang.activate}}
+			</a>
+		{% endif %}
+	</h2>
+</div>
+<form method="POST" id="adminUser" action="/admin/modifUser">
+	<div class="row-fluid">
+		<div class="span6">
+			<input type="hidden" name="user[user_id]" value="{{u.user_id}}" />
+			<div class="control-group">
+				<label class="control-label">{{_lang.register_login}}</label>
+				<div class="controls">
+					<input type="text" value="{{u.login}}" name="user[login]">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{{_lang.register_email}}</label>
+				<div class="controls">
+					<input type="text" value="{{u.email}}" name="user[email]">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{{_lang.register_password}}</label>
+				<div class="controls">
+					<input type="password" name="user[password]">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{{_lang.register_avatar}}</label>
+				<div class="controls">
+					<input type="text" value="{{u.avatar}}" name="user[avatar]">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{{_lang.dbgolds}}</label>
+				<div class="controls">
+					<input type="text" value="{{u.argent}}" name="user[argent]">
+				</div>
+			</div>
+		</div>
+		<div class="span6">
+			<ul class="nav nav-pills">
+				<li><a class="label label-inverse" href="#"><i class="icon-chevron-up icon-white"></i> {{u.grade}}</a></li>
+				{% if u.alliance is defined %}
+					<li><a class="label label-inverse" href="#"><i class="icon-flag icon-white"></i> {{u.alliance.nom}}</a></li>
+				{% endif %}
+				<li><a class="label label-inverse" href="#"><img src="/public/images/icons/icon-coin-white.png"/> {{u.argent}}</a></li>
+				<li><a class="label label-inverse" href="#"><img src="/public/images/icons/icon-cup-white.png"/> {{u.nb_success}}</a></li>
+				<li><a class="label label-inverse" href="#"><img src="/public/images/icons/icon-group-white.png"/> {{u.filleuls|length}} {{_lang.title_filleuls}}</a></li>
+				<li><a class="label label-inverse" href="#"><img src="/public/images/icons/icon-group-white.png"/> {{u.amis|length}} {{_lang.title_friends}}</a></li>
+			</ul>
+			<br />
+			<img src="{{u.avatar}}" class="avatar_large img-polaroid"/>
+		</div>
+	</div>
+	<div class="tabbable">
+		<ul class="nav nav-tabs">
+			{% set i = 0 %}
+			{% for p in planets %}
+				<li {% if i == 0 %}class="active"{%endif%}>
+					<a href="#admin_planet_{{p.id}}" data-toggle="tab">
+						{{p.nom}}
+					</a>
+				<li>
+				{% set i = 1 %}
+			{% endfor %}
+		</ul>
+		<div class="tab-content">
+			{% set i = 0 %}
+			{% for p in planets %}
+				<div class="tab-pane {% if i == 0 %}active{%endif%}" id="admin_planet_{{p.id}}">
+					<div class="control-group">
+						<label class="control-label">{{_lang.text_metal}}</label>
+						<div class="controls">
+							<input type="text" value="{{p.ressources.metaux}}" name="planet[{{p.id}}][metaux]"> / {{p.ressources.limit_metaux}}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">{{_lang.text_cristal}}</label>
+						<div class="controls">
+							<input type="text" value="{{p.ressources.cristaux}}" name="planet[{{p.id}}][cristaux]"> / {{p.ressources.limit_cristaux}}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">{{_lang.text_tetranium}}</label>
+						<div class="controls">
+							<input type="text" value="{{p.ressources.tetranium}}" name="planet[{{p.id}}][tetranium]"> / {{p.ressources.limit_tetranium}}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">{{_lang.text_population}}</label>
+						<div class="controls">
+							<input type="text" value="{{p.ressources.population}}" name="planet[{{p.id}}][population]"> / {{p.ressources.limit_population}}
+						</div>
+					</div>
+				</div>
+				{% set i = 1 %}
+			{% endfor %}
+		</div>
+	</div>
+	<a href="#" class="btn btn-primary pull-right" click="admin:modifUser">{{_lang.modify}}</a>
+</form>

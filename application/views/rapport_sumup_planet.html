@@ -1,0 +1,42 @@
+<div class="row-fluid">
+	<div class="span5">
+		<div class="pull-left">
+			<img src="/public/images/planete/{{planet_from.avatar}}" class="avatar_normal img-polaroid"/>
+			<ul class="nav nav-list">
+				<li>
+					<a href="#" class="label label-inverse">
+						<i class="icon-globe icon-white"></i> {{planet_from.nom}}
+					</a>
+				</li>
+				<li>
+					<a href="#" class="label label-inverse">
+						<i class="icon-map-marker icon-white"></i> {{_lang.label_galaxy}} {{planet_to.galaxie}}
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="span2">
+		<h1 class="center versus">&rarr;</h1>
+	</div>
+
+	<div class="span5">
+		<div class="pull-right">
+			<img src="/public/images/planete/{{planet_to.avatar}}" class="avatar_normal img-polaroid"/>
+			<ul class="nav nav-list">
+				<li>
+					<a href="#" class="label label-inverse">
+						<i class="icon-globe icon-white"></i> {{planet_to.nom}}
+					</a>
+				</li>
+				<li>
+					<a href="#" class="label label-inverse">
+						<i class="icon-map-marker icon-white"></i> {{_lang.label_galaxy}} {{planet_from.galaxie}}
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<hr />

@@ -1,0 +1,12 @@
+<form action="/forum/postAnswer?id={{topic_id}}" method="POST">
+<label for="answer"> Poster une reponse:</label> 
+<img src="/public/images/bold.gif" alt="gras" click="forum:insert_text('[b]', '[/b]')">
+<img src="/public/images/quote.gif" alt="citation" click="forum:insert_text('[quote]', '[/quote]')">
+<img src="/public/images/italic.gif" alt="italic" click="forum:insert_text('[i]', '[/i]')">
+<img src="/public/images/strike.gif" alt="barre" click="forum:insert_text('[s]', '[/s]')">
+<img src="/public/images/underline.gif" alt="souligner" click="forum:insert_text('[u]', '[/u]')">
+<img src="/public/images/image.gif" alt="image" click="forum:insert_text('[img]', '[/img]')">
+<br />
+<textarea id="answer" name="answer"> </textarea> <br />
+<input type="submit" value="Envoyer"></input>
+</form>	

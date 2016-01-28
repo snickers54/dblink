@@ -1,0 +1,18 @@
+{% if _user.config.isAdmin and isLogged == true %}
+        <div class="modal hide fade" id="editAdmin">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>{{_lang.admin}}</h3>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-list">
+                    <li><a href="/admin/buildings" class="label label-inverse"><i class="icon-pencil icon-white"></i> {{_lang.admin_buildings}}</a></li>
+                    <li><a href="/admin/users" class="label label-inverse"><i class="icon-pencil icon-white"></i> {{_lang.admin_users}}</a></li>
+                    <li><a href="/admin/success" class="label label-inverse"><i class="icon-pencil icon-white"></i> {{_lang.admin_success}}</a></li>
+                    <li><a href="/admin/mission" class="label label-inverse"><i class="icon-pencil icon-white"></i> {{_lang.admin_mission}}</a></li>
+                    <li><a href="/admin/terrains" class="label label-inverse"><i class="icon-pencil icon-white"></i> {{_lang.admin_planete_type}}</a></li>
+                    <li><a href="/admin/news" class="label label-inverse"><i class="icon-pencil icon-white"></i> {{_lang.admin_news}}</a></li>
+                </ul>
+            </div>
+        </div>
+{% endif %}

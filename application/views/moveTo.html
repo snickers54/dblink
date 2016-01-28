@@ -1,0 +1,20 @@
+Vous etes ici : <a href="/forum/">Index</a> > <a href="/forum/voirForum?id={{infos['id']}}">{{infos['name']}}</a> > <a href="/forum/moderate?id={{infos['id']}}"> moderer le forum </a> > <strong> Deplacer les sujets </strong>
+
+<form action="/forum/moderate?id={{infos['id']}}" method="POST">
+<label for="to">Deplacer les sujets vers:</label>
+<select id="to" name="to">
+	{% set last = "" %}
+	{% for v in info %}
+		{% if v['name_cat'] != last %}
+			{% if last != ""%}
+				</optgroup>
+			{% endif %}
+			<optgroup label="{{v['name_cat']}}">
+			{% set last = v['name_cat'] %}
+		{%endif %}
+		<option value="{{v['forum_id']}}">{{v['name_forum']}}</option>
+	{% endfor%}
+</select>
+<input type="hidden" value="{{topics}}" name="topics">
+<input type="submit" value="deplacer" name="moveTo">
+</form>

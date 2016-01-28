@@ -1,0 +1,82 @@
+
+
+<div class="well">
+	<fieldset>
+		<legend>{{infos.0.nom}} - {{infos.0.tag}}</legend>
+		<i style="font-size: 20px; color: white;">"{{infos.0.citation}}"</i> <br> <br>
+		<div class="pull-right" style="width: 50%;"><span class="label">membres :</span> {{infos.0.nb_membre}}</div>
+		<span class="label">Description</span>
+		<div style="width: 50%; max-height: 200px; overflow: auto;"><blockquote>{{infos.0.description | nl2br | bbcode | raw}}</blockquote></div>
+		<div style="width: 50%;" class="pull-right"><span class="label">Message de Bienvenu</span>
+		<div style=" max-height: 200px; overflow: auto;"><blockquote>{{infos.0.welcome_text | nl2br | bbcode | raw}}</blockquote></div></div>
+		<span class="label">Website</span>
+		<div style="width: 50%;"><blockquote><a href="{{infos.0.url_forum}}">{{infos.0.url_forum}}</a></blockquote></div>		
+	</fieldset>
+	<br>
+	<br>
+	<fieldset>
+		<ul class="nav nav-tabs" id="myTab">
+              <li class="active"><a href="#actus" data-toggle="tab">actus</a></li>
+  			<li><a href="#membres" data-toggle="tab">membres</a></li>
+  			<li><a href="#pacts" data-toggle="tab">pacts</a></li>
+  			<li><a href="#war" data-toggle="tab">wars</a></li>
+		</ul>
+
+		<div class="tab-content">
+  			<div class="tab-pane" id="membres">
+  				<table class="table">
+  					<tr>
+  						<th>#</th>
+  						<th>nom</th>
+  						<th>grade</th>
+  					</tr>
+  					{% set j = 1 %}
+  					{% for i in infos %}
+  					<tr>
+  						<td>{{j}}</td>
+  						<td><a href="/user/index?user_id={{i.id_user}}">{{i.login}}</a></td>
+  						<td>{{i.gradeName}}</td>
+  					</tr>
+  					{% set j = j + 1 %}
+  					{% endfor%}
+  				</table>
+  			</div>
+        <div class="tab-pane active" id="actus">
+          <pre style="height: 400px; overflow: auto;">
+            {% for a in actus %}
+              <img src="/public/images/{{a.icon}}"> {{a.date}} : {{a.content}} <br>
+            {% endfor %}
+          </pre>
+        </div>
+  			<div class="tab-pane" id="pacts">
+  				<table class="table">
+  					<tr>
+  						<th>en pacte avec</th>
+  					</tr>
+  					{% for p in pacts %}
+  					{% if p.my_status == 1 and p.their_status == 1 %}
+  					<tr>
+  						<td><a href="/alliance/viewAlly?id={{p.alliance_id}}">{{p.their_name}}</a></td>
+  					</tr>
+  					{% endif %}
+  					{% endfor %}
+  				</table>	
+  			</div>
+  			<div class="tab-pane" id="war">
+          <table class="table">
+            <tr>
+              <th>en guerre avec</th>
+            </tr>
+            {% for p in war %}
+            {% if p.my_status == 1 and p.their_status == 1 %}
+            <tr>
+              <td><a href="/alliance/viewAlly?id={{p.alliance_id}}">{{p.their_name}}</a></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </table>  
+        </div>
+  			
+		</div>
+	</fieldset>
+</div>

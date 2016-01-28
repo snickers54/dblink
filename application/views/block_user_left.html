@@ -1,0 +1,21 @@
+<div class="well">
+	<a href="#editUser" class="pull-right" data-toggle="modal" style="display:inline;">
+		<i class="icon-pencil icon-white"></i>
+	</a>
+	<ul class="nav nav-pills">
+		<li>
+			<a href="#"><img src="{{_user.avatar}}" class="avatar_medium img-polaroid" /></a>
+		</li>
+		<li>
+			<ul class="nav nav-list">
+				<li class="nav-header">{{_user.login}}<br />{{_user.nom}} {{_user.prenom}}</li>
+				<li><a data-placement="right" class="tip label label-inverse" data-original-title="{{_lang.grade}}" href="/user/index"><i class="icon-chevron-up icon-white"></i> {{_user.grade}}</a></li>
+				{% if _alliance is defined %}
+					<li><a data-placement="right" class="tip label label-inverse" data-original-title="{{_lang.ally}}" href="/alliance/myAlly"><i class="icon-flag icon-white"></i> {{_alliance.nom}}</a></li>
+				{% endif %}
+				<li><a data-placement="right" class="tip label label-inverse" data-original-title="{{_lang.dbgolds}}" href="/shop/index"><img class="icon" src="/public/images/icons/icon-coin-white.png"/> {{_user.argent}}</a></li>
+				<li><a data-placement="right" class="tip label label-inverse" data-original-title="{{_lang.achievement}}" href="/user/index"><img class="icon" src="/public/images/icons/icon-cup-white.png"/> {{_user.nb_success}}</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>

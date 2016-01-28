@@ -1,0 +1,99 @@
+<div class='row-fluid'>
+	<div class="well span8">
+		<div>
+			<div class="row-fluid">
+				<div class="span4">
+                	<img src="/public/images/avatar/robotdblink.jpg" class="avatar_large label label-inverse"/>
+				</div>
+				<div class="span8">
+					{{_lang.missions_kosmix_presentation|raw}}
+				</div>
+			</div>
+		</div>
+		{% for m in missions %}
+			<div id="mission_{{m.id}}" class="mission off">
+				<div class="page-header"> 
+					<h2>{{m.title}} <small>#{{m.type}}</small></h2>
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+						<img src="{{m.avatar}}" class="avatar_large img-polaroid"/>
+					</div>
+					<div class="span8">
+						<blockquote>{{m.description | nl2br}}</blockquote>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+			<div id="mission_captchme" class="mission off">
+				<div class="page-header">
+					<h2>Captcha</h2>
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+						<img src="/public/images/avatar/robotdblink.jpg" class="avatar_medium img-polaroid" />
+					</div>
+					<div class="span8">
+						<form method="POST" action='/board/missions'>
+							<blockquote>
+								{{captchme_generate | raw}}
+								{% if diff > 0 %}
+									<div class="progress progress-striped active current">
+							  			<div class="bar" style="width: {{diff_p}}%;">
+							  				<span class="timebar">{{diff | totime}}</span>
+							  			</div>
+									</div>
+								{% endif %}
+							</blockquote>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	<div class="well span4">
+		<ul class="nav nav-list list-right" id="missions_list">
+			<li class="nav-header">{{_lang.missions_tutorial_label}}</li>
+			<li class="divider"></li>
+			{% for m in missions %}
+				{% if m.mission_type == "tutorial" %}
+					<li click="board:loadMission" mission_id="{{m.id}}">
+						<a href="#" class="label label-inverse">
+						{% if m.status == 1 %}
+							<i class="icon-ok icon-white"></i>
+						{% else %}
+							<i class="icon-remove icon-white"></i>
+						{% endif %}
+						{{m.title}}
+						</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+			<li class="nav-header">{{_lang.missions_annexe_label}}</li>
+			<li class="divider"></li>
+			<li>
+				<a href="#" class="label label-inverse" click="board:loadMission" mission_id="captchme">
+					{% if diff > 0 %}
+						<i class="icon-ok icon-white"></i>
+					{% endif %}
+					Captcha
+				</a>
+			</li>
+			<li class="nav-header">{{_lang.missions_campagne_label}}</li>
+			<li class="divider"></li>
+			{% for m in missions %}
+				{% if m.mission_type == "campagne" %}
+					<li click="board:loadMission" mission_id="{{m.id}}">
+						<a href="#" class="label label-inverse">
+						{% if m.status == 1 %}
+							<i class="icon-ok icon-white"></i>
+						{% else %}
+							<i class="icon-remove icon-white"></i>
+						{% endif %}
+						{{m.title}}
+						</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+</div>

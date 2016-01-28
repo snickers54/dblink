@@ -1,0 +1,17 @@
+<div class="well">
+	<h3>{{_lang.bourse_buy_title}}</h3>
+	<hr />
+	<form class="form-horizontal">
+		<label class="checkbox">
+			<input type="text" name="number" keyup="bourse:calc_price" class="input input-mini" id="bourse_buy_input" placeholder="0"/>
+			<select name="type" class="input input-small" change="bourse:calc_price" id="bourse_buy_select">
+				<option value="metal">{{_lang.text_metal}}</option>
+				<option value="cristal">{{_lang.text_cristal}}</option>
+				<option value="tetranium">{{_lang.text_tetranium}}</option>
+				<option value="energie">{{_lang.text_energie}}</option>
+			</select>
+			<a href="#" class="btn btn-danger pull-right" click="bourse:buy_actions">{{_lang.buy}}</a>
+		</label>
+	</form>
+	<blockquote class="total_actions_cost"></blockquote>
+</div>

@@ -1,0 +1,61 @@
+<div class="well">
+	<a href="#editPlanet" class="pull-right" data-toggle="modal" style="display:inline;"><i class="icon-pencil icon-white"></i></a>
+	<ul class="nav nav-pills">
+		<li>
+			<a href="#planetAvatar" data-toggle="modal">
+				<img src="/public/images/planete/{{_planet.avatar}}" id="planet_avatar" class="avatar_medium img-polaroid"/>
+			</a>
+		</li>
+		<li>
+			<ul class="nav nav-list">
+		    	<li>
+		    		{% set metaux_productivity = _ressources.metaux_productivity %}
+		    		{% if _ressources.energie < 0 %}
+			    		{% set metaux_productivity = 35 %}
+		    		{% endif %}
+		    		<a href="#" data-placement="right" data-original-title="{{(_ressources.metaux_grow * metaux_productivity / 100) | number_format(0, '.', ' ')}}/h" class="tip label label-inverse">
+	    			 {{"metal"|convertIcons|raw}} <span class="{% if _ressources.metaux >= _ressources.limit_metaux %}rouge{%endif%}">{{_ressources.metaux|number_format(0, '.', ' ')}}</span> / {{_ressources.limit_metaux | number_format(0, '.', ' ')}}
+		    		</a>
+		    	</li>
+		    	<li>
+		    		{% set cristaux_productivity = _ressources.cristaux_productivity %}
+		    		{% if _ressources.energie < 0 %}
+			    		{% set cristaux_productivity = 35 %}
+		    		{% endif %}
+		    		<a href="#" data-placement="right" data-original-title="{{(_ressources.cristaux_grow * cristaux_productivity / 100) | number_format(0, '.', ' ')}}/h" class="tip label label-inverse">
+		    			{{"cristal"|convertIcons|raw}} <span class="{% if _ressources.cristaux >= _ressources.limit_cristaux %}rouge{%endif%}">{{_ressources.cristaux|number_format(0, '.', ' ')}}</span> / {{_ressources.limit_cristaux | number_format(0, '.', ' ')}}
+		    		</a>
+		    	</li>
+		    	<li>
+		    		{% set tetranium_productivity = _ressources.tetranium_productivity %}
+		    		{% if _ressources.energie < 0 %}
+			    		{% set tetranium_productivity = 35 %}
+		    		{% endif %}
+		    		<a href="#" data-placement="right" data-original-title="{{(_ressources.tetranium_grow * tetranium_productivity / 100) | number_format(0, '.', ' ')}}/h" class="tip label label-inverse">
+		    			{{"tetranium"|convertIcons|raw}} <span class="{% if _ressources.tetranium >= _ressources.limit_tetranium %}rouge{%endif%}">{{_ressources.tetranium|number_format(0, '.', ' ')}}</span> / {{_ressources.limit_tetranium | number_format(0, '.', ' ')}}
+		    		</a>
+		    	</li>
+		    	<li>
+		    		<a href="#" class="tip label label-inverse" data-placement="right" data-original-title="{{_ressources.population_grow}}/h">
+		    			{{"population"|convertIcons|raw}} <span class="{% if _ressources.population >= _ressources.limit_population %}rouge{%endif%}">{{_ressources.population|number_format(0, '.', ' ')}}</span> / {{_ressources.limit_population | number_format(0, '.', ' ')}}
+		    		</a>
+		    	</li>
+		    	<li>
+		    		<a href="#" class="label label-inverse pop" {% if _ressources.energie <= 0 %}data-placement="right" data-original-title="{{_lang.title_energie_low}}" data-content="{{_lang.content_energie_low}}" {%endif%}>
+		    			{{"energie"|convertIcons|raw}} <span class="{% if _ressources.energie <= 0 %}rouge{%endif%}">{{_ressources.energie|number_format(0, '.', ' ')}}</span>
+		    		</a>
+		    	</li>
+		    </ul>
+		</li>
+	</ul>
+	<ul class="nav nav-pills">
+		{% for t in _planet.terrains %}
+			<li>
+				<a href="#" data-content="{{t.texte}}" data-original-title="{%if t.metal != 0%}{{t.metal}}% {{_lang.text_metal}}{%endif%} {% if t.cristal != 0 %}{{t.cristal}}% {{_lang.text_cristal}}{%endif%} {% if t.tetranium != 0 %}{{t.tetranium}}% {{_lang.text_tetranium}}{%endif%}" data-placement="right" class="pop label label-inverse">{{t.nom}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+	<blockquote>
+		{{_planet.note}}
+	</blockquote>
+</div>

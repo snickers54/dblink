@@ -1,0 +1,79 @@
+{% if isLogged == true %}
+	<h3>{{_lang.planet_productivity}}</h3>
+	<hr />
+	<div class="well">
+		<table class="table table-condensed table-hover">
+			<tr class="success">
+				<th>#</th>
+				<th>{{_lang.resources_quantity}}</th>
+				<th>{{_lang.resources_limits}}</th>
+				<th>{{_lang.resources_production}}</th>
+				<th>{{_lang.resources_productivity}}</th>
+			</tr>
+			<tr>
+				<td>{{"metal"|convertIcons|raw}}</td>
+				<td>{{_ressources.metaux | number_format(0, '.', ' ')}}</td>
+				<td>{{_ressources.limit_metaux | number_format(0, '.', ' ')}}</td>
+				<td id="metaux_productivity">{{(_ressources.metaux_grow * _ressources.metaux_productivity / 100) | number_format(0, '.', ' ')}}
+					{% if _ressources.metaux_grow_bonus != 0 %}
+						{% if _ressources.metaux_grow_bonus > 0 %}+{%else%}-{%endif%} 
+						{{(_ressources.metaux_grow_bonus * _ressources.metaux_productivity / 100) | number_format(0, '.', ' ')|abs}}
+					{% endif %}
+				</td>
+				<td>
+					<select class="input-small" name="metaux_productivity" max_prod="{{(_ressources.metaux_grow + _ressources.metaux_grow_bonus)}}"  change="home:changeProductivity">
+						{% for i in range(35, 100, 5) %}
+							<option value="{{i}}" {% if _ressources.metaux_productivity == i %}selected="selected"{%endif%}>{{i}}%</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>{{"cristal"|convertIcons|raw}}</td>
+				<td>{{_ressources.cristaux | number_format(0, '.', ' ')}}</td>
+				<td>{{_ressources.limit_cristaux | number_format(0, '.', ' ')}}</td>
+				<td id="cristaux_productivity">{{(_ressources.cristaux_grow * _ressources.cristaux_productivity / 100) | number_format(0, '.', ' ')}}
+					{% if _ressources.cristaux_grow_bonus != 0 %}
+						{% if _ressources.cristaux_grow_bonus > 0 %}+{%else%}-{%endif%} 
+						{{(_ressources.cristaux_grow_bonus * _ressources.cristaux_productivity / 100) | number_format(0, '.', ' ')|abs}}
+					{% endif %}
+				</td>
+				<td>
+					<select class="input-small" name="cristaux_productivity"  max_prod="{{(_ressources.cristaux_grow + _ressources.cristaux_grow_bonus)}}" change="home:changeProductivity">
+						{% for i in range(35, 100, 5) %}
+							<option value="{{i}}" {% if _ressources.cristaux_productivity == i %}selected="selected"{%endif%}>{{i}}%</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>{{"tetranium"|convertIcons|raw}}</td>
+				<td>{{_ressources.tetranium | number_format(0, '.', ' ')}}</td>
+				<td>{{_ressources.limit_tetranium | number_format(0, '.', ' ')}}
+				</td>
+				<td id="tetranium_productivity">{{(_ressources.tetranium_grow * _ressources.tetranium_productivity / 100) | number_format(0, '.', ' ')}}
+					{% if _ressources.tetranium_grow_bonus != 0 %}
+						{% if _ressources.tetranium_grow_bonus > 0 %}+{%else%}-{%endif%} 
+						{{(_ressources.tetranium_grow_bonus * _ressources.tetranium_productivity / 100) | number_format(0, '.', ' ')|abs}}
+					{% endif %}
+				</td>
+				<td>
+					<select class="input-small" name="tetranium_productivity"  max_prod="{{(_ressources.tetranium_grow + _ressources.tetranium_grow_bonus)}}" change="home:changeProductivity">
+						{% for i in range(35, 100, 5) %}
+							<option value="{{i}}" {% if _ressources.tetranium_productivity == i %}selected="selected"{%endif%}>{{i}}%</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>{{"population"|convertIcons|raw}}</td>
+				<td>{{_ressources.population | number_format(0, '.', ' ')}}</td>
+				<td>{{_ressources.limit_population | number_format(0, '.', ' ')}}</td>
+				<td>~ {{_ressources.population_grow}}</td>
+				<td>
+				</td>
+			</tr>
+		</table>
+		<a href="#" class="btn pull-right" data-dismiss="modal">{{_lang.modify}}</a>
+	</div>
+{% endif %}

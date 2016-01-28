@@ -1,0 +1,28 @@
+<h2>{{_lang.title_colonisation}} [G{{planet.galaxie}}P{{planet.id}}]</h2>
+<hr />
+{% if vaisseaux.colonisateur is not defined or vaisseaux.colonisateur.number == 0 %}
+	<div class="alert alert-error">
+		{{_lang.need_colonisateur}}
+	</div>
+{% endif %}
+<form method="POST" action="/move/doColonisation" id="move_flotte">
+	<ul class="nav nav-pills">
+		<li><a href="#" class="label label-inverse pop" data-placement="left" data-content="{{_lang.move_needs_tetranium}}" data-original-title="{{_lang.move_needs_tetranium_title}}"><img src="/public/images/icons/icon-tetranium-white.png" /> <span id="conso_tetranium">0</span></a></a></li>
+		
+		<li id="time_colonisation_normal"><a href="#" class="label label-inverse pop" data-placement="top" data-content="{{_lang.move_needs_time}}" data-original-title="{{_lang.move_needs_time_title}}"><i class="icon-time icon-white"></i> <span>{{(time + (8*3600))|totime}}</span></a></li>
+		
+		<li id="time_colonisation_technologie" class="off"><a href="#" class="label label-inverse pop" data-placement="top" data-content="{{_lang.move_needs_time}}" data-original-title="{{_lang.move_needs_time_title}}"><i class="icon-time icon-white"></i> <span>{{(time + (14*3600))|totime}}</span></a></li>
+
+		<li><a href="#" class="label label-inverse pop" data-placement="bottom" data-content="{{_lang.move_needs_distance}}" data-original-title="{{_lang.move_needs_distance_title}}"><i class="icon-resize-horizontal icon-white"></i> <span id="conso_distance">{{distance|todistance|raw}}</span></a></li>
+		<li><a href="#" class="label label-inverse pop" data-placement="right" data-content="{{_lang.move_needs_stockage}}" data-original-title="{{_lang.move_needs_stockage_title}}"><img src="/public/images/icons/icon-cargo-white.png" /> <span id="conso_stockage">0</span></a></li>
+	</ul>
+	<a href="#" class="btn btn-danger pull-right" click="board:sendFlotte"><b>{{_lang.colonisation}}</b></a>
+	<select name="behavior_type" change="home:changeTimeColonisation">
+		<option value="colonisation_normal">{{_lang.colonisation_normal}}</option>
+		<option value="colonisation_technologie">{{_lang.colonisation_technologie}}</option>
+	</select>
+	<hr />
+	{% include 'desk_form_vaisseaux.html' %}
+	<hr />
+	{% include 'desk_form_ressources.html' %}
+</form>

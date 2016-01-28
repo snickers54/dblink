@@ -1,0 +1,14 @@
+<div class="row-fluid">
+	<div class="span8 well" id="admin_content">
+	</div>
+	<div class="span4 well">
+		<ul class="nav nav-list" id="users_list">
+			<li class="nav-header">{{_lang.title_players}}</li>
+			{% for u in users %}
+				<li click="admin:loadUser" user_id="{{u.user_id}}">
+					<a href="#" class="label label-inverse">{{u.login}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+
+<div class="well off">
+	<div class="row-fluid">
+		<div class="span4">
+			<h3>Mine de metal : </h3>
+			<p>Croissance de base (par heure) : <input type="text" name="start_grow_metal" value="240" keyup="script:calc"/></p>
+			<p>Pourcentage de croissance pour chaque niveau : <input type="text" name="percent_grow_metal" keyup="script:calc" value="15"/></p>
+		</div>
+		<div class="span4">
+			<h3>Mine de cristal : </h3>
+			<p>Croissance de base (par heure) : <input type="text" name="start_grow_cristal" value="230" keyup="script:calc"/></p>
+			<p>Pourcentage de croissance pour chaque niveau : <input type="text" name="percent_grow_cristal" value="15" keyup="script:calc"/></p>
+		</div>
+		<div class="span4">
+			<h3>Mine de tetranium : </h3>
+			<p>Croissance de base (par heure) : <input type="text" name="start_grow_tetranium" value="200" keyup="script:calc"/></p>
+			<p>Pourcentage de croissance pour chaque niveau : <input type="text" name="percent_grow_tetranium" value="10" keyup="script:calc"/></p>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div id="metal_levels" class="span4">
+		</div>
+		<div id="cristal_levels" class="span4">
+		</div>
+		<div id="tetranium_levels" class="span4">
+		</div>
+	</div>
+</div>
+
+<div class="well">
+	<select change="script:showB">
+		<option></option>
+		{% for b in batiments %}
+			<option value="{{b.code}}">{{b.nom}}</option>
+		{% endfor %}
+	</select>
+	<div id="showB">
+
+	</div>
+</div>

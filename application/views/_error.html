@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+	<head>
+   <title>SingleFramework | erreur</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <link href="/public/css/bootstrap/bootstrap.min.css" title="design" type="text/css" media="screen" rel="stylesheet">
+   <link href="/public/css/style.css" title="design" type="text/css" media="screen" rel="stylesheet">
+   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+   </head>
+<body>
+	
+	<div class="topbar">
+		<div class="fill">
+			<div class="container">
+				<a class="brand" href="#">projectName</a>
+				<div class="pull-right">
+					<ul class="nav">
+					  <li><a href="/home/index">Accueil</a></li>
+					  <li><a href="#about">Contact</a></li>
+					  <li><a href="/forum">Forum</a></li>
+					</ul>
+		      	</div>
+		    </div>
+		</div>
+	</div>
+	
+	<div class="container" id="main-content">
+		<div class="well" style="margin: 100px auto; width: 350px;">
+			<h1><?php echo $title_h1; ?></h1>
+			<p><?php echo $text_erreur; ?></p>
+			<div class="actions" style="text-align: center; padding: 0px; margin: 0px; margin-top: 15px; padding-top: 15px;">
+			  <a  class="btn error" href="/"><?php echo $text_ret;?></a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

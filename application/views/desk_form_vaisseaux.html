@@ -1,0 +1,60 @@
+{% set i = 0 %}
+<div class="row-fluid">
+	{% for v in vaisseaux %}
+		{% set number = v.number %}
+		{% if v.number is not defined %}
+			{% set number = 0 %}
+		{% endif %}
+		{% if number > 0 %}
+
+			{% if i % 2 == 0 and i > 0 %}
+				</div>
+				<hr />
+				<div class="row-fluid">
+			{% endif %}
+			<div class="span6 ship">
+				<div class="row-fluid">
+					<div class="span5">
+						<img src="/public/images/{{v.avatar}}" class="img-polaroid avatar_medium" alt="">
+					</div>
+					<div class="span7">
+						<ul class="nav nav-pills">
+							<li>
+								<a href="#" class="label label-inverse">
+									{{number}} {{v.nom}}
+								</a>
+							</li>
+							{% if v.attaque is defined %}
+							<li>
+								<a href="#" class="label label-inverse">
+									<img src="/public/images/icons/icon-attack-white.png" /> {{v.attaque}}
+								</a>
+							</li>
+							{%endif%}
+							
+							<li>
+								<a href="#" class="label label-inverse">
+									<img src="/public/images/icons/icon-shield-white.png" /> {% if v.vie is defined %}{{v.vie}}{% else %}{{v.defense_base}}{% endif %}
+								</a>
+							</li>
+							{% if v.stockage_unite is defined %}
+							<li>
+								<a href="#" class="label label-inverse">
+									<img src="/public/images/icons/icon-cargo-white.png" /> {{v.stockage_unite}}
+								</a>
+							</li>
+							{% endif %}
+						</ul>
+						<p class="ship_nb">
+							<a href="javascript:" click="board:minusShip"><i class="icon-minus icon-white cursor"></i></a>
+							<input type="text" value="0" tetranium="{{v.tetranium_base}}" stockage="{{v.stockage_unite}}" name="ship[{{v.code}}]" class="span4" change="board:sortShip"/>
+							<a href="javascript:" click="board:addShip"><i class="icon-plus icon-white"></i></a>
+						</p>
+					</div>
+				</div>
+			</div>
+			{% set i = i + 1 %}
+		{% endif %}
+	{% endfor %}
+</div>
+<input type="hidden" name="planet_id" value="{{planet.id}}" />

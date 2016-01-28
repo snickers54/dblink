@@ -1,0 +1,64 @@
+<div class="row-fluid">
+	<div class="span8">
+		<div class="tabbable">
+			<ul class="nav nav-tabs onglet_top affix">
+				<li class="active" id="batiments_li">
+					<a href="#batiments" click="constructions:setOnglet" data-toggle="tab">{{_lang.building_batiments}}</a>
+				</li>
+				<li id="vaisseaux_li">
+					<a href="#vaisseaux" click="constructions:setOnglet" data-toggle="tab">{{_lang.building_vaisseaux}}</a>
+				</li>
+				<li id="defenses_li">
+					<a href="#defenses" click="constructions:setOnglet" data-toggle="tab">{{_lang.building_defenses}}</a>
+				</li>
+				<li id="civils_li">
+					<a href="#civils" click="constructions:setOnglet" data-toggle="tab">{{_lang.building_civils}}</a>
+				</li>
+				<li id="technologies_li">
+					<a href="#technologies" click="constructions:setOnglet" data-toggle="tab">{{_lang.building_technologies}}</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="batiments">
+					{% for b in batiments %}
+						{% include 'constructions_level.html' %}
+					{% endfor %}
+				</div>
+				<div class="tab-pane" id="vaisseaux">
+					{% for b in vaisseaux %}
+						{% include 'constructions_number.html' %}
+					{% endfor %}
+				</div>
+				<div class="tab-pane" id="defenses">
+					{% for b in defenses %}
+						{% include 'constructions_number.html' %}
+					{% endfor %}
+				</div>
+				<div class="tab-pane" id="civils">
+					{% for b in civils %}
+						{% include 'constructions_number.html' %}
+					{% endfor %}
+				</div>
+				<div class="tab-pane" id="technologies">
+					{% for b in technologies %}
+						{% include 'constructions_level.html' %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="span4 well">
+		<ul class="nav nav-list list-right">
+			{% set buildings = batiments %}
+			{% include 'current_constructions.html' %}
+			{% set buildings = vaisseaux %}
+			{% include 'current_constructions.html' %}
+			{% set buildings = defenses %}
+			{% include 'current_constructions.html' %}
+			{% set buildings = civils %}
+			{% include 'current_constructions.html' %}
+			{% set buildings = technologies %}
+			{% include 'current_constructions.html' %}
+		</ul>
+	</div>
+</div>

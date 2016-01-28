@@ -1,0 +1,33 @@
+<div class="row-fluid">
+	<div class="span8 well">
+		{% include suffixe %}
+	</div>
+		<div class="span3">
+			<div class="well">
+				<p>
+					<img src="/public/images/planete/{{planet.avatar}}" class="avatar_large img-polaroid"/>
+				</p>
+				<ul class="nav nav-pills">
+					<li><a href="#" class="label label-inverse"><i class="icon-globe icon-white"></i> {% if planet.nom | length > 0 %}{{planet.nom}}{%else%}G{{planet.galaxie}}P{{planet.id}}{%endif%}</a></li>
+					<li><a href="#" class="label label-inverse"><i class="icon-resize-full icon-white"></i> {{planet.case}} {{_lang.planet_size}}</a></li>
+					<li><a href="#" class="label label-inverse"><i class="icon-map-marker icon-white"></i> {{_lang.planet_galaxy}} {{planet.galaxie}}</a></li>
+					<li><a href="#" class="label label-inverse"><i class="icon-repeat icon-white"></i> {{planet.revolution}} min</a></li>
+					<li><a href="#" class="label label-inverse">{{planet.label_weather|raw}}</a></li>
+				</ul>
+			</div>
+			{% if planet.user_id > 0 %}
+				<div class="well">
+					<p>
+						<img src="{{user.avatar}}" class="avatar_large img-polaroid"/>
+					</p>
+					<ul class="nav nav-pills">
+						<li><a href="#" class="label label-inverse"><i class="icon-user icon-white"></i> {{user.login}}</a></li>
+						<li><a href="#" class="label label-inverse"><i class="icon-chevron-up icon-white"></i> {{user.grade}}</a></li>
+						{% if alliance is defined %}
+							<li><a href="#" class="label label-inverse"><i class="icon-flag icon-white"></i> {{alliance.nom}}</a></li>
+						{% endif %}
+					</ul>
+				</div>
+			{% endif %}
+		</div>
+</div>

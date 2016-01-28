@@ -1,0 +1,42 @@
+<form {% if s is defined %}id="success_form_{{s.id}}"{%else%} id="success_new"{%endif%} method="POST" action="#" class="form-horizontal {% if s is not defined %}off{%endif%}">
+	{% if s is defined %}
+		<input type="hidden" name="id" value="{{s.id}}" />
+	{% endif %}
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_name}}</label>
+		<div class="controls">
+			<input type="text" name="nom" value="{{s.nom}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_points}}</label>
+		<div class="controls">
+			<input type="text" name="pts" value="{{s.pts}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_code}}</label>
+		<div class="controls">
+			<input type="text" name="code" value="{{s.code}}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">{{_lang.building_description}}</label>
+		<div class="controls">
+			<textarea name="description">{{s.description|nl2br}}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			{% if s is defined %}
+				<a href="#" click="admin:modifSuccess" class="btn btn-primary" success_id="{{s.id}}">
+					{{_lang.modify}}
+				</a>
+			{% else %}
+				<a href="#" click="admin:createSuccess" class="btn btn-primary">
+					{{_lang.create}}
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</form>

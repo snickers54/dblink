@@ -1,0 +1,69 @@
+<form id="mail_new" class="form-horizontal well">
+	{% if mail is defined and mail.id is defined %}
+		<input type="hidden" name="id_parent" value="{{mail.id}}"/>
+	{% endif %}
+	<div class="control-group">
+		<div class="controls receivers">
+			{% if mail is defined %}
+				{% if mail.login is defined %}
+					<span class='label label-inverse'><span class='badge cursor' click='mails:delReceiver'>x</span> {{mail.login}}<input type='hidden' name='author[{{mail.from_user_id}}]' value='{{mail.from_user_id}}' /></span>
+				{% endif %}
+				{% for rec in mail.receiver %}
+					{% if rec.user_id != _user.user_id %}
+						<span class='label label-inverse'><span class='badge cursor' click='mails:delReceiver'>x</span> {{rec.login}}<input type='hidden' name='author[{{rec.user_id}}]' value='{{rec.user_id}}' /></span>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on label cursor label-inverse"><i class="icon-user icon-white"></i></span>
+				<input class="span12" keyup="mails:completion" id="mail_receiver"/>
+			</div>
+		</div>
+		<div class="controls completion_list">
+			<ul class="nav nav-list span4 off">
+			</ul>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on cursor label label-inverse">></span>
+				<input name="object" class="span12" value="{% if mail is defined and mail.objet is defined %}RE: {{mail.objet}}{%endif%}"/>
+			</div>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<img src='/public/images/chat/bold.png' class="cursor twipbelow" data-original-title="gras" onClick="insert_text('[b]', '[/b]', 'mp');" />
+            <img src='/public/images/chat/italic.png' class="cursor twipbelow" data-original-title="italique" onClick="insert_text('[i]', '[/i]', 'mp');" />
+            <img src='/public/images/chat/underline.png' class="cursor twipbelow" data-original-title="souligner" onClick="insert_text('[s]', '[/s]', 'mp');" />
+            <img src='/public/images/chat/link.png' class="cursor twipbelow" data-original-title="lien" onClick="insert_link('mp');" />
+            <img src='/public/images/chat/image.png' data-original-title="image" class="cursor twipbelow" onClick="insert_text('[img]', '[/img]', 'mp');" />
+            <img src='/public/images/chat/sourire.png' class="cursor" onClick="insert_text(':)', '', 'mp');" />
+            <img src='/public/images/chat/langue.png' class="cursor" onClick="insert_text(':P', '', 'mp');" />
+            <img src='/public/images/chat/hihi.png' class="cursor" onClick="insert_text('^^', '', 'mp');" />
+            <img src='/public/images/chat/heureux.png' class="cursor" onClick="insert_text(':D', '', 'mp');" />
+            <img src='/public/images/chat/wink.png' class="cursor" onClick="insert_text(';)', '', 'mp');" />
+            <img src='/public/images/chat/huh.png' class="cursor" onClick="insert_text(':o', '', 'mp');" />
+            <img src='/public/images/chat/rire.gif' class="cursor" onClick="insert_text(':mdr:', '', 'mp');" />
+            <img src='/public/images/chat/euh.gif' class="cursor" onClick="insert_text(':euh:', '', 'mp');" />
+            <img src='/public/images/chat/triste.png' class="cursor" onClick="insert_text(':triste:', '', 'mp');" />
+            <img src='/public/images/chat/colere.png' class="cursor" onClick="insert_text(':@', '', 'mp');" />
+            <img src='/public/images/chat/hein.gif' class="cursor" onClick="insert_text(':hein:', '', 'mp');" />
+            <img src='/public/images/chat/siffle.png' class="cursor" onClick="insert_text(':lala:', '', 'mp');" />
+		</div>
+		<div class="controls">
+			<textarea name="mp" class="input-xxlarge"></textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<a href="#" class="btn" click="mails:send">{{_lang.mail_send}}</a>
+		</div>
+	</div>
+
+</form>

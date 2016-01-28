@@ -1,0 +1,36 @@
+<div class="well" id="bourse_exchange">
+	{% set energie = 0 %}
+	{% set metal = 0 %}
+	{% set cristal = 0 %}
+	{% set tetranium = 0 %}
+
+	{% for a in actions %}
+		{% if a.type == "metal" %}
+			{% set metal = metal + 1 %}
+		{% endif %}
+		{% if a.type == "cristal" %}
+			{% set cristal = cristal + 1 %}
+		{% endif %}
+		{% if a.type == "tetranium" %}
+			{% set tetranium = tetranium + 1 %}
+		{% endif %}
+	{% endfor %}
+	<h3>{{_lang.bourse_exchange_title}}</h3>
+	<hr />
+	{% if metal > 0 %}
+		<p>
+			<input type="text" name="nb_metal" value="0" class="input-mini"/> #{{_lang.text_metal}}
+		</p>
+	{% endif %}
+	{% if cristal > 0 %}
+		<p>
+			<input type="text" name="nb_cristal" value="0" class="input-mini"/> #{{_lang.text_cristal}}
+		</p>
+	{% endif %}
+	{% if tetranium > 0 %}
+		<p>
+			<input type="text" name="nb_tetranium" value="0" class="input-mini"/> #{{_lang.text_tetranium}}
+		</p>
+	{% endif %}
+	<a href="#" class="btn btn-danger" click="bourse:exchange">{{_lang.exchange}}</a>
+</div>

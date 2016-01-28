@@ -1,0 +1,14 @@
+<div class="rapport">
+	<p>&nbsp;</p>
+	<ul class="nav nav-pills">
+		<li><a href="#" class="label label-inverse"><i class="icon-user icon-white"></i> {{user_to.login}}</a></li>
+		<li><a href="#" class="label label-inverse"><i class="icon-globe icon-white"></i> {{planet_to.nom}}</a></li>
+		<li><a href="#" class="label label-inverse"><i class="icon-time icon-white"></i> {{json.timestamp | date("d/m/Y à H:m")}}</a></li>
+	</ul>
+	<hr />
+	<div>
+		{% for j in json %}
+			
+		{% endfor %}
+	</div>
+</div>

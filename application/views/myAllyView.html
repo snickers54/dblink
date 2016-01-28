@@ -1,0 +1,231 @@
+<div class="row-fluid">
+	<div class="span8 well">
+		
+		<fieldset>
+			
+			<div class="tab-content">
+			<div class="tab-pane active" id="infos">
+				<legend>{{infos.0.nom}} - {{infos.0.tag}}</legend>
+			<i style="font-size: 20px; color: white;">"{{infos.0.citation}}"</i> <br> <br>
+			<div class="pull-right" style="width: 50%;"><span class="label">membres :</span> {{infos.0.nb_membre}}</div>
+			<span class="label">Description</span>
+			<div style="width: 50%; max-height: 200px; overflow: auto;"><blockquote>{{infos.0.description | nl2br | bbcode | raw}}</blockquote></div>
+			<div style="width: 50%;" class="pull-right"><span class="label">Message de Bienvenu</span>
+			<div style=" max-height: 200px; overflow: auto;"><blockquote>{{infos.0.welcome_text | nl2br | bbcode | raw}}</blockquote></div></div>
+			<span class="label">Website</span>
+			<div style="width: 50%;"><blockquote><a href="{{infos.0.url_forum}}">{{infos.0.url_forum}}</a></blockquote></div>
+				</div>
+				<div class="tab-pane" id="admin">
+					<div class="tab-content">
+						<ul class="nav nav-tabs " id="myTabAdmin">
+		  					<li class="active"><a href="#infosAdmin" data-toggle="tab">infos</a></li>
+		  					<li><a href="#addNews" data-toggle="tab">Rediger une news</a></li>
+		  					<li><a href="#adminNews" data-toggle="tab">Gerer les news</a></li>
+		  					<li><a href="#adminMembers" data-toggle="tab">Gerer les membres <span class="label-important"></span>({{candidats}})</span></a></li>
+						</ul>
+						<span class="label label-info">Rappel: il faut actualisé la page pour voir les modifications efféctuée</span> <br><br>
+						{# infos admin #}
+						<div class="tab-pane active" id="infosAdmin">
+							<span class="label">Nom : </span><br><input type="text" id="nom" value="{{infos.0.nom}}"><button click="alliance:updateAlly" item="nom">update</button><br>
+							<span class="label">tag : <br></span><input type="text" id="tag" value="{{infos.0.tag}}"><button click="alliance:updateAlly" item="tag">update</button><br>
+							<span class="label">citation :<br></span><input type="text" value="{{infos.0.citation}}" id="citation"> <button click="alliance:updateAlly" item="citation"> update </button><br>
+							
+							<div><span class="label">Description</span><br><textarea id="description">{{infos.0.description | nl2br }}</textarea> <button click="alliance:updateAlly" item="description">update </button></div><br>
+							<div><span class="label">Message de Bienvenue</span>
+							<div><textarea id="welcome">{{infos.0.welcome_text | nl2br}}</textarea> <button click="alliance:updateAlly" item="welcome">update</button></div></div>
+							<span class="label">Website</span>
+							<div><input type="text" id="url" value="{{infos.0.url_forum}}"> <button click="alliance:updateAlly" item="url">update</button></div>
+							<br>
+						</div>
+						{# admin members#}
+						<div class="tab-pane" id="adminMembers">
+							{% if nbCandidats > 0 %}
+							<table class="table">
+								<tr>
+									<th>candidat</th>
+									<th>Actions</th>
+								</tr>
+								{% for c in candidatsList %}
+								<tr>
+									<td><a href="/user/index?user_id={{c.id_user}}">{{c.login}}</a></td>
+									<td><span class="label" id_user="{{c.id_user}}" click="alliance:acceptMember" style="cursor: pointer;" userName="{{c.login}}">accepter</span> | <span class="label" style="cursor: pointer;" id_user "{{c.id_user}}" click="alliance:rejectMember">rejeter</span></td>
+								</tr>
+								{% endfor %}
+							{% endif %}
+							</table>
+							<table class="table">
+								<tr>
+									<th>nom</th>
+									<th>grade</th>
+									<th>actions</th>
+								</tr>
+								{% for g in infos %}
+								<tr>
+									<td><a href="/user/index?user_id={{g.id_user}}">{{g.login}}</a></td>
+									<td>{{g.gradeName}}</td>
+									<td> <select name="gradeSelect{{g.id_user}}"> 
+										{% for a in grades %}
+											<option value="{{a.id}}">{{a.nom}}</option>
+										{% endfor %}
+									</select> <span class="label" style="cursor: pointer;" click="alliance:modifyRank" user="{{g.id_user}}" userName="{{g.login}}">modifier</span> | <span class="label" style="cursor: pointer;" click="alliance:deleteMember" user ="{{g.id_user}}" userName="{{g.login}}">exclure</span> </td>
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+						{# add News #}
+						<div class="tab-pane" id="addNews">
+							<span class="label">Ajouter une news</span><br>
+							<input type="text" id="titleNews" placeholder="Titre..."><br>
+							<textarea id="contentNews" placeholder="Contenu..."></textarea> <br>
+							<button click="alliance:postNews">Ajouter la news</button>
+						</div>
+						{# Admin news #}
+						<div class="tab-pane" id="adminNews">
+							<table class="table">
+								<tr>
+									<th>#</th>
+									<th>Titre</th>
+									<th>Auteur</th>
+									<th>date</th>
+									<th>Actions</th>
+								</tr>
+								{% set k = 1 %}
+								{% for n in news %}
+								<tr id="{{n.title}}">
+									<td>{{k}}</td>
+									<td>{{n.title}}</td>
+									<td>{{n.login}}</td>
+									<td>{{n.date}}</td>
+									<td><span class="label" style="cursor: pointer" title="{{n.title}}" content="{{n.content}}" id_news="{{n.id}}" click="alliance:modifyNews">Modifier</span> | 
+										<span class="label" style="cursor: pointer" id_news="{{n.id}}" click="alliance:deleteNews">Supprimer</span></td>	
+								</tr>
+								{% set k = k + 1 %}
+								{% endfor %}
+							</table>
+
+							<br>
+							<br>
+							<br>
+							<hr>
+							<br>
+							<br>
+							<br>
+
+							<span class="label">Modifier une news</span><br>
+							<input type="text" id="modifyNewsTitle"><br>
+							<input type="hidden" id="modifyNewsID">
+							<textarea id="modifyNewsContent"></textarea><br>
+							<button click="alliance:modifyNewsSend">Modifier !</button>
+						</div>
+					</div>
+
+				</div>
+				<div class="tab-pane" id="actus">
+					<pre style="height: 400px; overflow: auto;">
+						{% for a in actus %}
+							<img src="/public/images/{{a.icon}}"> {{a.date}} : {{a.content}} <br>
+						{% endfor %}
+					</pre>
+				</div>
+	  			<div class="tab-pane" id="membres">
+	  				<table class="table">
+	  					<tr>
+	  						<th>#</th>
+	  						<th>nom</th>
+	  						<th>grade</th>
+	  					</tr>
+	  					{% set j = 1 %}
+	  					{% for i in infos %}
+	  					<tr>
+	  						<td>{{j}}</td>
+	  						<td><a href="/user/index?user_id={{i.id_user}}">{{i.login}}</a></td>
+	  						<td>{{i.gradeName}}</td>
+	  					</tr>
+	  					{% set j = j + 1 %}
+	  					{% endfor%}
+	  				</table>
+	  			</div>
+	  			<div class="tab-pane" id="pacts">
+	  				<table class="table">
+	  					<tr>
+	  						<th>en pacte avec</th>
+	  					</tr>
+	  					{% for p in pacts %}
+	  					{% if p.my_status == 1 and p.their_status == 1 %}
+	  					<tr>
+	  						<td><a href="/alliance/viewAlly?id={{p.alliance_id}}">{{p.their_name}}</a></td>
+	  					</tr>
+	  					{% endif %}
+	  					{% endfor %}
+	  				</table>	
+	  			</div>
+	  			<div class="tab-pane" id="war">
+	          <table class="table">
+	            <tr>
+	              <th>en guerre avec</th>
+	            </tr>
+	            {% for p in war %}
+	            {% if p.my_status == 1 and p.their_status == 1 %}
+	            <tr>
+	              <td><a href="/alliance/viewAlly?id={{p.alliance_id}}">{{p.their_name}}</a></td>
+	            </tr>
+	            {% endif %}
+	            {% endfor %}
+	          </table>  
+	        </div>
+	        	<div class="tab-pane" id="news">
+	          
+	            {% for n in news %}
+	            	<dl class="mail news">
+	            		<dt><span class="label">{{n.title}}</span></dt> 
+	            		<dd class="well"><blockquote>{{n.content | nl2br | bbcode | raw}}</blockquote><br><span class="label notice">{{n.author}}</span></dd>	
+	            	</dl>
+	            {% endfor %}
+	            {{ newsPagination | raw }}
+	        </div>
+	        <div class="tab-pane" id="grades" style="width: 100%; overflow: auto;">
+	  				<table class="table" >
+	  					<tr>
+	  						<th>nom</th>
+	  						<th>Super Admin</th>
+	  						<th>Candidat</th>
+	  						<th>Gerer les candidatures</th>
+	  						<th>Exclure les membres</th>
+	  						<th>Gerer les grades</th>
+	  						<th>Modifier les informations d'alliance</th>
+	  						<th>Gerer la banque d'alliance</th>
+	  						<th>Gerer les pactes</th>
+	  						<th>Gerer les guerres</th>
+	  					</tr>
+	  					{% for g in grades %}
+	  					<tr>
+	  						<td><a href="/alliance/viewAlly?id={{p.alliance_id}}">{{g.nom}}</a></td>
+	  					</tr>
+	  					{% endfor %}
+	  				</table>	
+	  			</div>
+
+	  	</div>
+			
+		</fieldset>
+		
+	</div>
+
+	<div class="span4 well">
+		<ul class="nav nav-tabs nav-stacked" id="myTab">
+	  			<li class="active"><a href="#infos" data-toggle="tab">infos</a></li>
+	  				<li><a href="#actus" data-toggle="tab">actualitées</a></li>
+	  			<li><a href="#news" data-toggle="tab">news</a></li>
+	  			<li><a href="#membres" data-toggle="tab">membres</a></li>
+	  			<li><a href="#grades" data-toggle="tab">grades</a></li>
+	  			<li><a href="#pacts" data-toggle="tab">pactes</a></li>
+	  			<li><a href="#war" data-toggle="tab">wars</a></li>
+	  			
+	  			{% if rights.modify_ally == 1 or rights.superAdmin == 1 %}
+	  			<li><a href="#admin" data-toggle="tab">Administration</a></li>
+	  			{% endif %}
+			</ul>
+
+	</div>
+
+</div>

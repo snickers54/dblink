@@ -1,0 +1,18 @@
+<div class="row-fluid">
+	<div class="well span8" id="rapport_content">
+	</div>
+	<div class="well span4">
+		<ul class="nav nav-list list-right" id="rapports_list">
+			<li class="nav-header">{{_lang.rapports_label_title}} {{_planet.nom}}</li>
+			<li class="divider"></li>
+			{% for r in rapports %}
+				<li click="board:getRapport" rapport_id="{{r.id}}" id="rapport_{{r.id}}">
+					<a href="#" class="label {% if r.readed == false %}label-important{%else%}label-inverse{%endif%}">
+						<span>{{r.planet_from}} > {{r.planet_to}} </span>
+						<span class="pull-right">{{r.template|capitalize}}</span>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>

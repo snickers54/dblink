@@ -1,0 +1,62 @@
+<div class="well">
+	<div class="row-fluid">
+		<div class="span4">
+			<img src="/public/images/planete/{{planet.avatar}}" class="avatar_small img-polaroid"/>
+		</div>
+		<div class="span8">
+			<h4>{{_lang.title_infos_planet}}</h4>
+			<hr />
+			<ul class="nav nav-list">
+				<li><a href="#" class="label label-inverse"><i class="icon-globe icon-white"></i> {% if planet.nom | length > 0 %}{{planet.nom}}{%else%}G{{planet.galaxie}}P{{planet.id}}{%endif%}</a></li>
+				<li><a href="#" class="label label-inverse"><i class="icon-resize-full icon-white"></i> {{planet.case}} {{_lang.planet_size}}</a></li>
+				<li><a href="#" class="label label-inverse"><i class="icon-map-marker icon-white"></i> {{_lang.planet_galaxy}} {{planet.galaxie}}</a></li>
+				<li><a href="#" class="label label-inverse"><i class="icon-repeat icon-white"></i> {{planet.revolution}} min</a></li>
+				<li><a href="#" class="label label-inverse"><i class="icon-resize-horizontal icon-white"></i> {{planet.distance|todistance}}</a></li>
+				<li><a href="#" class="label label-inverse">{{planet.label_weather|raw}}</a></li>
+			</ul>
+			{% if r.debris_metal > 0 or r.debris_cristal > 0 or r.debris_tetranium > 0 %}
+				<h4>{{_lang.title_debris}}</h4>
+				<hr />
+				<ul class="nav nav-pills">
+					{% if r.debris_metal > 0 %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"metal"|convertIcons|raw}} {{r.debris_metal}}
+							</a>
+						</li>
+					{% endif %}
+					{% if r.debris_cristal > 0 %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"cristal"|convertIcons|raw}} {{r.debris_cristal}}
+							</a>
+						</li>
+					{% endif %}
+					{% if r.debris_tetranium > 0 %}
+						<li>
+							<a href="#" class="label label-inverse">
+								{{"tetranium"|convertIcons|raw}} {{r.debris_tetranium}}
+							</a>
+						</li>
+					{% endif %}
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+	<div class="pull-right btn-group">
+		{% if r.debris_metal > 0 or r.debris_cristal > 0 or r.debris_tetranium > 0 %}
+			<a href="/move/recyclage?planet_id={{planet.id}}"><img src="/public/images/icons-big/icon-recyclage-white.png" ></a>
+		{% endif %}
+		{% if status is defined %}
+			{% if status != "moi" and status != "alliance" %}
+				<a href="/move/attack?planet_id={{planet.id}}"><img src="/public/images/icons-big/icon-screenshot-white.png" /></a>
+				<a href="/move/spy?planet_id={{planet.id}}"><img src="/public/images/icons-big/icon-eye-open-white.png" /></a>
+			{% endif %}
+			{% if (status == "amis" or status == "moi" or status == "alliance") and _batiments.chambre_commerce is defined and _batiments.chambre_commerce.level > 0 %}
+				<a href="/move/resource?planet_id={{planet.id}}"><img src="/public/images/icons-big/icon-cargo-white.png" /></a>
+			{% endif %}
+		{% else %}
+			<a href="/move/colonisation?planet_id={{planet.id}}"><img src="/public/images/icons-big/icon-globe-white.png" ></a>
+		{% endif %}
+	</div>
+</div>

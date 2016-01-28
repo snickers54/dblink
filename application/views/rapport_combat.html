@@ -1,0 +1,222 @@
+<div class="rapport">
+	{% if _user.user_id == user_from.user_id or _user.user_id == user_to.user_id %}
+		<div id="export_rapport" class="off pull-right">
+			<input type="text" disabled value="" />
+		</div>
+		<a href="#" rapport_id="{{id}}" class="btn btn-info" click="board:exportRapport">
+			<i class="icon-random icon-white"></i> {{_lang.export}}
+		</a>
+		<a href="#" rapport_id="{{id}}" class="btn btn-danger" click="board:delRapport">
+			<i class="icon-remove icon-white"></i> {{_lang.delete}}
+		</a>
+		<hr />
+	{% endif %}
+	{% include 'rapport_sumup_player.html' %}
+	{% include 'rapport_sumup_planet.html' %}
+	<div class="row-fluid">
+		<div class="span5">
+			<div class="pull-left">
+				<h4><em>{{_lang.label_attaque_start}}</em></h4>
+				<ul class="nav nav-pills">
+					{% for d in json.attaquant.vaisseaux_start %}
+						<li>
+							<a href="#" class="label label-inverse pop" data-placement="right" data-content='
+								<div class="row-fluid">
+									<div class="span6">
+										<img src="/public/images/{{d.avatar}}" class="avatar_small img-polaroid"/></div><div class="span6">
+										<ul class="nav nav-list">
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-attack-white.png" /> {{d.attaque_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-shield-white.png" /> {{d.defense_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-cargo-white.png" /> {{d.stockage_unite}}</a>
+											</li>
+										</ul>
+									</div>
+								</div>' data-original-title="{{d.nom}}">
+								{{d.number}} {{d.nom}}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+				<h4><em>{{_lang.label_attaque_end}}</em></h4>
+				<ul class="nav nav-pills">
+					{% for d in json.attaquant.vaisseaux_end %}
+						<li>
+							<a href="#" class="label label-inverse pop" data-placement="right" data-content='
+								<div class="row-fluid">
+									<div class="span6">
+										<img src="/public/images/{{d.avatar}}" class="avatar_small img-polaroid"/></div><div class="span6">
+										<ul class="nav nav-list">
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-attack-white.png" /> {{d.attaque_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-shield-white.png" /> {{d.defense_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-cargo-white.png" /> {{d.stockage_unite}}</a>
+											</li>
+										</ul>
+									</div>
+								</div>' data-original-title="{{d.nom}}">
+								{{d.number}} {{d.nom}}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+				<h4><em>{{_lang.label_attaque_loot}}</em></h4>
+				<ul class="nav nav-pills">
+					<li>
+						<a href="#" class="label label-inverse">
+							{{"metal"|convertIcons|raw}} {{json.attaquant.loot.metaux}}
+						</a>
+					</li>
+					<li>
+						<a href="#" class="label label-inverse">
+							{{"cristal"|convertIcons|raw}} {{json.attaquant.loot.cristaux}}
+						</a>
+					</li>
+					<li>
+						<a href="#" class="label label-inverse">
+							{{"tetranium"|convertIcons|raw}} {{json.attaquant.loot.tetranium}}
+						</a>
+					</li>
+					<li>
+						<a href="#" class="label label-inverse">
+							{{"population"|convertIcons|raw}} {{json.attaquant.loot.population}}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="span2">
+		</div>
+
+		<div class="span5">
+			<div class="pull-right">
+				<h4><em>{{_lang.label_attaque_start}}</em></h4>
+				<ul class="nav nav-pills">
+					{% for d in json.defenseur.vaisseaux_start %}
+						<li>
+							<a href="#" class="label label-inverse pop" data-placement="right" data-content='
+								<div class="row-fluid">
+									<div class="span6">
+										<img src="/public/images/{{d.avatar}}" class="avatar_small img-polaroid"/></div><div class="span6">
+										<ul class="nav nav-list">
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-attack-white.png" /> {{d.attaque_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-shield-white.png" /> {{d.defense_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-cargo-white.png" /> {{d.stockage_unite}}</a>
+											</li>
+										</ul>
+									</div>
+								</div>' data-original-title="{{d.nom}}">
+								{{d.number}} {{d.nom}}
+							</a>
+						</li>
+					{% endfor %}
+					{% for d in json.defenseur.defenses_start %}
+						<li>
+							<a href="#" class="label label-inverse pop" data-placement="right" data-content='
+								<div class="row-fluid">
+									<div class="span6">
+										<img src="/public/images/{{d.avatar}}" class="avatar_small img-polaroid"/></div><div class="span6">
+										<ul class="nav nav-list">
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-attack-white.png" /> {{d.attaque_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-shield-white.png" /> {{d.defense_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-cargo-white.png" /> {{d.stockage_unite}}</a>
+											</li>
+										</ul>
+									</div>
+								</div>' data-original-title="{{d.nom}}">
+								{{d.number}} {{d.nom}}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+				<h4><em>{{_lang.label_attaque_end}}</em></h4>
+				<ul class="nav nav-pills">
+					{% for d in json.defenseur.vaisseaux_end %}
+						<li>
+							<a href="#" class="label label-inverse pop" data-placement="right" data-content='
+								<div class="row-fluid">
+									<div class="span6">
+										<img src="/public/images/{{d.avatar}}" class="avatar_small img-polaroid"/></div><div class="span6">
+										<ul class="nav nav-list">
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-attack-white.png" /> {{d.attaque_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-shield-white.png" /> {{d.defense_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-cargo-white.png" /> {{d.stockage_unite}}</a>
+											</li>
+										</ul>
+									</div>
+								</div>' data-original-title="{{d.nom}}">
+								{{d.number}} {{d.nom}}
+							</a>
+						</li>
+					{% endfor %}
+					{% for d in json.defenseur.defenses_end %}
+						<li>
+							<a href="#" class="label label-inverse pop" data-placement="right" data-content='
+								<div class="row-fluid">
+									<div class="span6">
+										<img src="/public/images/{{d.avatar}}" class="avatar_small img-polaroid"/></div><div class="span6">
+										<ul class="nav nav-list">
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-attack-white.png" /> {{d.attaque_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-shield-white.png" /> {{d.defense_base}}</a>
+											</li>
+											<li>
+												<a href="#" class="label label-inverse"><img src="/public/images/icons/icon-cargo-white.png" /> {{d.stockage_unite}}</a>
+											</li>
+										</ul>
+									</div>
+								</div>' data-original-title="{{d.nom}}">
+								{{d.number}} {{d.nom}}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+				<h4><em>{{_lang.label_attaque_debris}}</em></h4>
+				<ul class="nav nav-pills">
+					<li>
+						<a href="#" class="label label-inverse">
+							<img src="/public/images/icons/icon-metal-white.png" /> {{json.defenseur.debris.debris_metal}}
+						</a>
+					</li>
+					<li>
+						<a href="#" class="label label-inverse">
+							<img src="/public/images/icons/icon-cristal-white.png" /> {{json.defenseur.debris.debris_cristal}}
+						</a>
+					</li>
+					<li>
+						<a href="#" class="label label-inverse">
+							<img src="/public/images/icons/icon-tetranium-white.png" /> {{json.defenseur.debris.debris_tetranium}}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<i class="date pull-right" time="{{date}}"></i>
+</div>

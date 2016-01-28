@@ -1,0 +1,29 @@
+<div class="row">
+  <form action="/forum/DoEditPost?id={{post['id']}}" method="POST">
+     <dl class="mail news" style="min-height: 100px;">
+   <dt class="cursor"> <label for="answer"><span class="label label-info">Vous etes ici : <a href="/forum/">Index</a> > <a href="/forum/voirForum?id={{infos['forum_id']}}">{{infos['forum_name']}}</a> > <a href="/forum/viewTopic?id={{infos['topic_id']}}">{{infos['topic_name']}}</a> > <strong> Editer mon message </strong></h3></label></dt>
+      <dd class="well">
+    <div class="span2">
+      
+      <div style="padding: 20px;">
+      <img src="/public/images/chat/bold.png" click="forum:insert_text" op="[b]" close="[/b]"></i>
+      <i class="icon-share" click="forum:insert_text" op="[quote]" close="[/quote]"></i>
+      <img src="/public/images/chat/italic.png" click="forum:insert_text" op="[i]" close="[/i]"></i>
+      <img src="/public/images/chat/underline.png" click="forum:insert_text" op="[u]" close="[/u]"></i>
+      <i class="icon-picture" click="forum:insert_text" op="[img]" close="[/img]"></i>
+    </div></div>
+    <div class="span10">
+   
+
+      <div class="messagebox">
+        <textarea id="answer" name="answer" id="answer" rows="7" style="width: 920px; resize:vertical;" >{{post['message']|raw}}</textarea>
+      </div>
+   
+      </div>
+    
+        <div style="text-align: center; width: 100%;" ><input type="submit" value="modifié" class="btn_get"></input></div>
+         </dd>
+    </dl>
+    </div>
+</form>
+</div>

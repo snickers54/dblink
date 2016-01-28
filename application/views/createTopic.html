@@ -1,0 +1,65 @@
+<br/>
+<h2 style="text-align: center; margin-top: 30px; margin-bottom: -20px; text-transform: uppercase;">Nouveau topic dans {{forum_name}} </h2><br/>
+
+
+<hr class="soften_wm">
+<div style="text-align:center;">
+  <a class="btn_get" href="/forum">Retour au forum</a>
+  <a href="/forum/voirForum?id={{id}}" class="btn_get">Retour {{forum_name}}</a>
+</div>
+<hr class="soften_wm">
+
+<div class="newtopic-content">
+	<form action="/forum/createTopic?id={{id}}" method="POST" class="form-horizontal" id="newtopic" style="margin: 0px auto;">
+		<fieldset>
+			{% if from_error == true %}
+			<div class="control-group error">
+			{% else %}
+			<div class="control-group">
+			{% endif %}
+				<div class="controls">
+					<input id="titre" type = "text" name = "titre" value = "{{titre}}" maxlength="80" placeholder="Titre">
+				</div>
+			</div>
+			
+			<br>
+			
+			{% if sujet_error == true %}
+			<div class="control-group error">
+			{% else %}
+			<div class="control-group">
+			{% endif %}
+				<div class="controls">
+					<select name="type" id="type">
+					  <option value="normal" selected="selected">Normal</option>
+						<option value="admin" {% if canAdmin == false %} disabled=disabled {% endif %}>Admin</option>
+						<option value="annonce" {% if canAnnonce == false %} disabled=disabled {% endif %}>Annonce</option>
+					</select>
+				</div>
+			</div>
+
+			<br>
+
+			{% if message_error == true %}
+			<div class="control-group error">
+			{% else %}
+			<div class="control-group">
+			{% endif %}
+				<div class="controls">
+					  <div style="padding: 20px;">
+      <img src="/public/images/chat/bold.png" click="forum:insert_text" op="[b]" close="[/b]"></i>
+      <i class="icon-share" click="forum:insert_text" op="[quote]" close="[/quote]"></i>
+      <img src="/public/images/chat/italic.png" click="forum:insert_text" op="[i]" close="[/i]"></i>
+      <img src="/public/images/chat/underline.png" click="forum:insert_text" op="[u]" close="[/u]"></i>
+      <i class="icon-picture" click="forum:insert_text" op="[img]" close="[/img]"></i>
+    </div>
+					<textarea style="resize: vertical;" class="span5" id="message" name="answer" rows="10" cols="80" placeholder="Message">{{message}}</textarea>
+				</div>
+			</div>
+
+			<div style="padding: 30px; text-align: center;">
+	        	<input type="submit" class="btn_get" value="Creer le nouveau topic"/>
+	        </div>
+		</fieldset>
+	</form>
+</div>
